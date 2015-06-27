@@ -7,7 +7,7 @@
   left: 0;
   z-index: 1060;
   display: none;
-  max-width: 276px;
+  max-width: 366px;
   padding: 1px;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
@@ -168,8 +168,13 @@
   padding: 5px;
   padding-right: 10px;
 }
-.popSelect-close {
+.popSelect-close, .popSelect-close:hover, .popSelect-close:active {
+  padding-left: 3px;
   color: white;
+  opacity: 0.8;
+}
+.popSelect-close:hover, .popSelect-close:active {
+  opacity: 1;
 }
 /* Hide the Textarea Input */
 textarea.popover-select-textarea {
@@ -184,9 +189,33 @@ textarea.popover-select-textarea {
   float: left;
   margin-left: 10px;
 }
+/* Dummy Input */
 .placeholder input {
   vertical-align: inherit; border: 0; outline: none; padding: 0; margin: 0; cursor: text;
   font-family: inherit; font-weight: inherit; font-size: inherit; font-style: inherit;
   box-shadow: none; background: none;
   height: 29px;
 }
+
+/* popSelect */
+.popover-select-list {
+  list-style-type: none;
+  overflow: hidden;
+  padding: 10px;
+  margin-bottom: 0;
+}
+
+.popover-select-list li {
+  cursor: pointer;
+  text-align: center;
+  float: left;
+  padding: 10px;
+  background-color: lightcoral;
+  margin: 5px;
+  -webkit-transition: 0.5s all;
+}
+
+.popover-select-list li:hover {
+  color: white;
+  background-color: red;
+};

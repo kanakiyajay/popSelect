@@ -14,25 +14,23 @@
 		<div class="container">
 			<div class="row m-t">
 				<div class="col-xs-6">
-					<select class="form-control" name="city" id="element">
-						<option value="pune">Pune</option>
-						<option value="bangalore">Bangalore</option>
-						<option value="delhi">Delhi</option>
-						<option value="mumbai">Mumbai</option>
+					<select class="form-control" name="city" id="myselect">
+						<option value="green">Green</option>
+						<option value="red">Red</option>
+						<option value="blue">Blue</option>
+						<option value="violet">Violet</option>
+						<option value="orange">Orange</option>
+						<option value="white">White</option>
 					</select>
 				</div>
 			</div>
 		</div>
 		<script src="../src/jquery-1.11.3.min.js"></script>
-		<!--
-		<script src="../src/jquery.bootstrap.tooltip.js"></script>
-		<script src="../src/jquery.bootstrap.popover.js"></script>
-		-->
 		<script src="../src/jquery.popSelect.js"></script>
 		<script>
 			$(function() {
-				$("#element").popSelect({
-					hello: "world",
+				$("#myselect").popSelect({
+					title: "Select any Colors",
 					debug: true
 				});
 			});

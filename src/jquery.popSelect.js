@@ -1,22 +1,22 @@
 /*
-	jQuery tagEditor v1.0.15
+	jQuery popSelect v0.0.2
    Copyright (c) 2015 Jay Kanakiya
    GitHub: https://github.com/kanakiyajay/popSelect
 	License: http://www.opensource.org/licenses/mit-license.php
 */
 ;(function ( $, window, document, undefined ) {
 
-	"use strict";
+	'use strict';
 
 		// Create the defaults once
-		var pluginName = "popSelect",
+		var pluginName = 'popSelect',
 				defaults = {
-					title: "Select Multiple Options",
+					title: 'Select Multiple Options',
 					debug: false
 				};
 
 		// The actual plugin constructor
-		function Plugin ( element, options ) {
+		function Plugin( element, options ) {
 				this.element = element;
 				// jQuery has an extend method which merges the contents of two or
 				// more objects, storing the result in the first object. The first object
@@ -55,11 +55,12 @@
 					this.$elem.empty();
 
 					// Append the popover to $elem
-					this.$elem.after(this.generatePopover(this.$options));
+					var popUpCode = this.generatePopover(this.$options);
+					$this.log('PopSelect Code Generated', popUpCode);
+					this.$elem.after(popUpCode);
 
 					// Assign the $popover to the new $elem
 					this.$popover = this.$elem.next('.popover-select');
-					// this.$popover.css({ top: 0, left: 0, display: 'block' });
 					this.$popover.css({ top: 0, left: 0 });
 
 					// Change
@@ -74,15 +75,6 @@
 
 					// Get the input
 					this.$inputTagField = this.$elem.next('.popover-tag-wrapper').find('.popover-select-textarea');
-
-					// Also Assign Focus Handler to the new input form field
-					/*
-					this.$inputTagField.on('focus', function() {
-						$this.$popover.show();
-						$this.changePosition();
-						$this.setPlaceholder();
-					});
-					*/
 
 					this.$inputTagField.on('blur', function() {
 						$this.$popover.hide();
@@ -99,13 +91,18 @@
 					});
 
 					// Attach Event Listener to ul list
-					this.$tags.on('click', 'popSelect-close', function() {
+					this.$tags.on('click', '.popSelect-close', function() {
 						var $li = $(this).parent();
+						$this.log('Close button clicked', $li);
 						var val = $li.attr('data-value');
 						var text = $li.attr('data-text');
 						// Remove them from input and add it to popover
-						console.log($li);
-						return false;
+						$this.appendToPopup(val, text);
+						$li.remove();
+
+						// Standard Reset Calls
+						$this.setPlaceholder();
+						$this.focus();
 					});
 
 					// Attach List Event Handlers to Li
@@ -118,9 +115,11 @@
 
 						// Remove them from popover and it to input
 						$this.$tags.append(li);
+						$(this).remove();
+
+						// Standard Reset Calls
 						$this.setPlaceholder();
 						$this.focus();
-						$(this).remove();
 
 						// Change Position as well show popover
 						$this.$popover.show();
@@ -131,13 +130,23 @@
 					this.$elem.hide();
 				},
 				focus: function() {
+					var $this = this;
 					this.$tags.find('.placeholder input').focus();
+					this.$tags.find('.placeholder input').on('blur', function() {
+						$this.$popover.hide();
+					});
 				},
 				setPlaceholder: function() {
 					if (this.$tags.children('.placeholder').length) {
 						this.$tags.children('.placeholder').remove();
 					}
 					this.$tags.append('<li class="placeholder"><div><input type="text"></div></li>');
+					this.disableInput();
+				},
+				disableInput: function() {
+					this.$tags.find('.placeholder input').keyup(function() {
+						$(this).val('');
+					});
 				},
 				setTitle: function(title) {
 					this.$popover.find('.popover-select-title').text(title);
@@ -158,13 +167,17 @@
 
 					return $.extend({}, elRect, scroll, outerDims, elOffset);
 				},
+				appendToPopup: function(val, text) {
+					var li = '<li data-value="' + val + '">' + text + '</li>';
+					this.$popover.find('.popover-select-list').append(li);
+				},
 				generatePopover: function(options) {
 					var list = '';
 					for (var i = 0; i < options.length; i++) {
 						list += '<li data-value="' + options[i].val + '">' + options[i].text + '</li>';
 					}
 					return '<div class="popover-select top">\
-										<h3 class="popover-select-title">Select Any Option</h3>\
+										<h3 class="popover-select-title">' + this.settings.title + '</h3>\
 										<div class="popover-select-body">\
 											<ul class="popover-select-list">\
 											' + list + '\
@@ -192,10 +205,10 @@
 
 		// A really lightweight plugin wrapper around the constructor,
 		// preventing against multiple instantiations
-		$.fn["popSelect"] = function (options) {
+		$.fn.popSelect = function (options) {
 				return this.each(function() {
-						if ( !$.data( this, "plugin_" + "popSelect" ) ) {
-								$.data( this, "plugin_" + "popSelect", new Plugin( this, options ) );
+						if (!$.data(this, 'plugin_' + 'popSelect') ) {
+							$.data(this, 'plugin_' + 'popSelect', new Plugin( this, options ) );
 						}
 				});
 		};
