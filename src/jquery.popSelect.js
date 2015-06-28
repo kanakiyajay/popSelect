@@ -144,8 +144,28 @@
 					this.disableInput();
 				},
 				disableInput: function() {
-					this.$tags.find('.placeholder input').keyup(function() {
+					var $this = this;
+					this.$tags.find('.placeholder input').keyup(function(e) {
 						$(this).val('');
+						if (e.which == 8 || e.which == 46 || e.ctrlKey && e.which == 88) {
+							// Delete the last selected li if present
+							var tags = $this.$tags.find('.tag');
+							if (tags.length) {
+								var $li = $(tags[tags.length - 1]);
+								var val = $li.attr('data-value');
+								var text = $li.attr('data-text');
+								// Remove them from input and add it to popover
+								$this.appendToPopup(val, text);
+								$li.remove();
+
+								// Standard Reset Calls
+								$this.changePosition();
+								$this.setPlaceholder();
+								$this.focus();
+							} else {
+								$this.log('No element to be removed');
+							}
+						}
 					});
 				},
 				setTitle: function(title) {
