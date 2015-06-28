@@ -226,11 +226,21 @@
 		// A really lightweight plugin wrapper around the constructor,
 		// preventing against multiple instantiations
 		$.fn.popSelect = function (options) {
-				return this.each(function() {
-						if (!$.data(this, 'plugin_' + 'popSelect') ) {
-							$.data(this, 'plugin_' + 'popSelect', new Plugin( this, options ) );
-						}
-				});
+				if (typeof(options) === 'string') {
+					if (options === 'value') {
+						return this.next('.popover-tag-wrapper').find('li.tag').map(function(i, $elem){
+							return $($elem).attr('data-value');
+						});
+					} else {
+						console.warn('Not Supported');
+					}
+				} else {
+					return this.each(function() {
+							if (!$.data(this, 'plugin_' + 'popSelect') ) {
+								$.data(this, 'plugin_' + 'popSelect', new Plugin( this, options ) );
+							}
+					});
+				}
 		};
 
 })( jQuery, window, document );
