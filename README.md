@@ -2,7 +2,7 @@
 
 ### A simple to use jQuery plugin to create popover boxes over select input tags. A new way to select multiselect.
 
-http://stackoverflow.com/questions/931207/is-there-a-jquery-autogrow-plugin-for-text-fields
+
 
 ## Usage
 
@@ -64,6 +64,15 @@ The basic structure of the project is given in the following way:
 ├── Gruntfile.js
 └── package.json
 ```
+
+## TODO
+
+[] Add support for easy themeing.
+[x] Add support for getting value from select.
+[x] Add support for backspace delete
+[] Add support for multidirectional popovers.
+[] Auto-growing textarea
+[] Add Sorting Options
 
 #### [demo/](https://github.com/jquery-boilerplate/boilerplate/tree/master/demo)
 
