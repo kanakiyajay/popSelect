@@ -1,43 +1,26 @@
 {
-  "name": "jquery-boilerplate",
-  "version": "3.5.0",
-  "description": "A jump-start for jQuery plugins development.",
+  "name": "jquey-popselect",
+  "version": "0.1.12",
+  "description": "Replaces traditional <select> with a better looking alternative",
   "keywords": [
     "jquery-plugin",
     "jquery",
-    "boilerplate",
-    "plugins"
+    "select",
+    "selectbox"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/jquery-boilerplate/jquery-boilerplate.git"
+    "url": "https://github.com/kanakiyajay/popSelect.git"
   },
   "bugs": {
-    "url": "https://github.com/jquery-boilerplate/jquery-boilerplate/issues"
+    "url": "https://github.com/kanakiyajay/popSelect/issues"
   },
   "author": {
-    "name": "Zeno Rocha",
-    "email": "zno.rocha@gmail.com",
-    "url": "https://github.com/zenorocha"
+    "name": "Jay Kanakiya",
+    "email": "kanakiyajay@gmail.com",
+    "url": "https://jaykanakiya.com/"
   },
-  "homepage": "http://jqueryboilerplate.com",
-  "contributors": [
-    {
-      "name": "Zeno Rocha",
-      "email": "zno.rocha@gmail.com",
-      "url": "https://github.com/zenorocha"
-    },
-    {
-      "name": "Addy Osmani",
-      "email": "addyosmani@gmail.com",
-      "url": "https://github.com/addyosmani"
-    },
-    {
-      "name": "Helder Santana",
-      "email": "heldr@me.com",
-      "url": "https://github.com/heldr"
-    }
-  ],
+  "homepage": "http://jquer.in/popselect",
   "license": "MIT",
   "devDependencies": {
     "grunt": "~0.4.5",
@@ -47,8 +30,5 @@
     "grunt-contrib-jshint": "^0.11.0",
     "grunt-contrib-uglify": "^0.8.0",
     "grunt-contrib-watch": "^0.6.1"
-  },
-  "scripts": {
-    "test": "grunt travis --verbose"
   }
 }

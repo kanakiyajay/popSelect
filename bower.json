@@ -1,18 +1,17 @@
 {
-	"name": "jquery-boilerplate",
-	"version": "3.5.0",
-	"homepage": "http://jqueryboilerplate.com",
+	"name": "jquey-popselect",
+	"version": "0.1.12",
+	"homepage": "http://jquer.in/popselect",
 	"authors": [
-		"Zeno Rocha <hi@zenorocha.com>"
+		"Jay Kanakiya <kanakiyajay@gmail.com>"
 	],
-	"description": "A jump-start for jQuery plugins development.",
-	"main": "src/jquery.boilerplate.js",
+	"description": "Replaces traditional <select> with a better looking alternative",
+	"main": "src/jquery.popSelect.js",
 	"keywords": [
 		"jquery",
 		"plugin",
-		"boilerplate",
-		"jquery-plugin",
-		"jquery-boilerplate"
+		"select",
+		"selectbox"
 	],
 	"license": "MIT"
 }

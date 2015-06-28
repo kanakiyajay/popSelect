@@ -67,12 +67,13 @@ The basic structure of the project is given in the following way:
 
 ## TODO
 
-[] Add support for easy themeing.
-[x] Add support for getting value from select.
-[x] Add support for backspace delete
-[] Add support for multidirectional popovers.
-[] Auto-growing textarea
-[] Add Sorting Options
+- [] Add support for easy themeing.
+- [x] Add support for getting value from select.
+- [x] Add support for backspace delete
+- [] Add support for multidirectional popovers.
+- [] Auto-growing textarea
+- [] Add Sorting Options
+- [] Support multiple attribute in select.
 
 #### [demo/](https://github.com/jquery-boilerplate/boilerplate/tree/master/demo)
 
