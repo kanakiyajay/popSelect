@@ -15,6 +15,37 @@
 					debug: false
 				};
 
+		var classNames = {
+			tag: 'tag',
+			selectWrapper: 'popover-select-wrapper',
+			tagWrapper: 'popover-tag-wrapper',
+			popoverSelect: 'popover-select',
+			selectTextarea: 'popover-select-textarea',
+			selectTags: 'popover-select-tags',
+			popoverClose: 'popSelect-close',
+			selectList: 'popover-select-list',
+			placeholder: 'placeholder',
+			placeholderInput: 'placeholder input',
+			selectTitle: 'popover-select-title'
+		};
+
+		var logs = {
+			popoverGenerated: 'PopSelect Code Generated',
+			closeClicked: 'Close button clicked',
+			noElem: 'No element to be removed'
+		};
+
+		var constants = {
+			option: 'option',
+			blur: 'blur',
+			click: 'click',
+			mousedown: 'mousedown',
+			li: 'li',
+			attrVal: 'data-value',
+			attrText: 'data-text',
+			body: 'BODY'
+		};
+
 		// The actual plugin constructor
 		function Plugin( element, options ) {
 				this.element = element;
@@ -35,7 +66,7 @@
 					this.$elem = $(this.element);
 
 					// Get all the options in an array
-					this.$options = this.$elem.children('option').map(function(i, option) {
+					this.$options = this.$elem.children(constants.option).map(function(i, option) {
 						return {
 							val: $(option).val(),
 							text: $(option).text()
@@ -43,47 +74,51 @@
 					});
 
 					// Wrap the whole input box in your own popover
-					this.$elem.wrap('<div class="popover-select-wrapper"></div>');
+					this.$elem.wrap(template(createEmptyDiv(), {
+						wrapper: classNames.selectWrapper
+					}));
 
 					var elemPos = this.getPosition(this.$elem);
 					this.elemPos = elemPos;
 
 					// Also Add the required css Properties
-					this.$elem.parent('.popover-select-wrapper').css({ width: elemPos.width, height: elemPos.height});
+					this.$elem
+						.parent(addDot(classNames.selectWrapper))
+						.css({ width: elemPos.width, height: elemPos.height});
 
 					// Clear the input list
 					this.$elem.empty();
 
 					// Append the popover to $elem
 					var popUpCode = this.generatePopover(this.$options);
-					$this.log('PopSelect Code Generated', popUpCode);
+					$this.log(logs.popoverGenerated, popUpCode);
 					this.$elem.after(popUpCode);
 
 					// Assign the $popover to the new $elem
-					this.$popover = this.$elem.next('.popover-select');
+					this.$popover = this.$elem.next(addDot(classNames.popoverSelect));
 					this.$popover.css({ top: 0, left: 0 });
 
 					// Change
 					this.changePosition();
 
 					// Append Tagging System to it
-					this.$elem.after('<div class="popover-tag-wrapper">\
-						<textarea class="popover-select-textarea form-control"></textarea>\
-						<ul class="popover-select-tags">\
-						</ul>\
-						</div>');
+					this.$elem.after(createTaggingStr());
 
 					// Get the input
-					this.$inputTagField = this.$elem.next('.popover-tag-wrapper').find('.popover-select-textarea');
+					this.$inputTagField = this.$elem
+																	.next(addDot(classNames.tagWrapper))
+																	.find(addDot(classNames.selectTextarea));
 
-					this.$inputTagField.on('blur', function() {
+					this.$inputTagField.on(constants.blur, function() {
 						$this.$popover.hide();
 					});
 
 					// Get the tagging wrapper
-					this.$tags = this.$elem.next('.popover-tag-wrapper').find('.popover-select-tags');
+					this.$tags = this.$elem
+												.next(addDot(classNames.tagWrapper))
+												.find(addDot(classNames.selectTags));
 
-					this.$tags.on('click', function() {
+					this.$tags.on(constants.click, function() {
 						$this.$popover.show();
 						$this.changePosition();
 						$this.setPlaceholder();
@@ -91,11 +126,12 @@
 					});
 
 					// Attach Event Listener to ul list
-					this.$tags.on('click', '.popSelect-close', function() {
+					this.$tags.on(constants.click, addDot(classNames.popoverClose), function() {
 						var $li = $(this).parent();
-						$this.log('Close button clicked', $li);
-						var val = $li.attr('data-value');
-						var text = $li.attr('data-text');
+						$this.log(logs.closeClicked, $li);
+						var val = $li.attr(constants.attrVal);
+						var text = $li.attr(constants.attrText);
+
 						// Remove them from input and add it to popover
 						$this.appendToPopup(val, text);
 						$li.remove();
@@ -106,12 +142,12 @@
 					});
 
 					// Attach List Event Handlers to Li
-					this.$popover.find('.popover-select-list').on('mousedown', function(e) {
+					this.$popover.find(addDot(classNames.selectList)).on(constants.mousedown, function(e) {
 						e.preventDefault();
-					}).on('click', 'li', function() {
-						var val = $(this).attr('data-value');
+					}).on(constants.click, constants.li, function() {
+						var val = $(this).attr(constants.attrVal);
 						var text = $(this).text();
-						var li = '<li class="tag" data-value="' + val + '" data-text="' + text + '"><span class="close popSelect-close">&times;</span>' + text + '</li>';
+						var li = createTagStr(val, text);
 
 						// Remove them from popover and it to input
 						$this.$tags.append(li);
@@ -131,29 +167,29 @@
 				},
 				focus: function() {
 					var $this = this;
-					this.$tags.find('.placeholder input').focus();
-					this.$tags.find('.placeholder input').on('blur', function() {
+					this.$tags.find(addDot(classNames.placeholderInput)).focus();
+					this.$tags.find(addDot(classNames.placeholderInput)).on(constants.blur, function() {
 						$this.$popover.hide();
 					});
 				},
 				setPlaceholder: function() {
-					if (this.$tags.children('.placeholder').length) {
-						this.$tags.children('.placeholder').remove();
+					if (this.$tags.children(addDot(classNames.placeholder)).length) {
+						this.$tags.children(addDot(classNames.placeholder)).remove();
 					}
 					this.$tags.append('<li class="placeholder"><div><input type="text"></div></li>');
 					this.disableInput();
 				},
 				disableInput: function() {
 					var $this = this;
-					this.$tags.find('.placeholder input').keyup(function(e) {
+					this.$tags.find(addDot(classNames.placeholderInput)).keyup(function(e) {
 						$(this).val('');
-						if (e.which == 8 || e.which == 46 || e.ctrlKey && e.which == 88) {
+						if (e.which === 8 || e.which === 46 || e.ctrlKey && e.which === 88) {
 							// Delete the last selected li if present
-							var tags = $this.$tags.find('.tag');
+							var tags = $this.$tags.find(addDot(classNames.tag));
 							if (tags.length) {
 								var $li = $(tags[tags.length - 1]);
-								var val = $li.attr('data-value');
-								var text = $li.attr('data-text');
+								var val = $li.attr(constants.attrVal);
+								var text = $li.attr(constants.attrText);
 								// Remove them from input and add it to popover
 								$this.appendToPopup(val, text);
 								$li.remove();
@@ -163,7 +199,7 @@
 								$this.setPlaceholder();
 								$this.focus();
 							} else {
-								$this.log('No element to be removed');
+								$this.log(logs.noElem);
 							}
 						}
 					});
@@ -175,14 +211,14 @@
 					$element   = $element || this.$element;
 
 					var el     = $element[0];
-					var isBody = el.tagName == 'BODY';
+					var isBody = el.tagName === constants.body;
 
 					var elRect    = el.getBoundingClientRect();
 					if (elRect.width == null) {
 						elRect = $.extend({}, elRect, { width: elRect.right - elRect.left, height: elRect.bottom - elRect.top });
 					}
 					var elOffset  = isBody ? { top: 0, left: 0 } : $element.offset();
-					var scroll    = { scroll: isBody ? document.documentElement.scrollTop || document.body.scrollTop : $element.scrollTop() }
+					var scroll = { scroll: isBody ? document.documentElement.scrollTop || document.body.scrollTop : $element.scrollTop() }
 					var outerDims = isBody ? { width: $(window).width(), height: $(window).height() } : null;
 
 					return $.extend({}, elRect, scroll, outerDims, elOffset);
@@ -222,6 +258,62 @@
 					}
 				}
 		});
+
+		/**
+		 * A quick helper function for creating templates
+		 * @param  {string} s Template String
+		 * @param  {object} d Values to replace for
+		 * @return {string}   Populated template string
+		 */
+		function template (s,d) {
+			for (var p in d)
+				s = s.replace(new RegExp('{' + p + '}', 'g'), d[p]);
+			return s;
+		}
+
+		/**
+		 * Just adds a dot for easy class selection
+		 * @param {string} str DOM className
+		 * @return {string} jQuery selector
+		 */
+		function addDot (str) {
+			return '.' + str;
+		}
+
+		function createEmptyDiv (x) {
+			if (x) {
+				return '<div class="{' + x + '}"></div>';
+			} else {
+				return '<div class="{wrapper}"></div>';
+			}
+		}
+
+		function createTaggingStr () {
+			return template('<div class="{tagWrapper}">' +
+											  		'<textarea class="{selectTextarea}"></textarea>' +
+										  			'<ul class="{selectTags}">' +
+											  		'</ul>' +
+											  '</div>', {
+										  			tagWrapper: classNames.tagWrapper,
+										  			selectTextarea: classNames.selectTextarea,
+										  			selectTags: classNames.selectTags
+												});
+		}
+
+		function createTagStr (val, text) {
+			return template('<li class="{tag}" data-value="{val}" data-text="{text}">' +
+									  			'<span class="{popoverClose}">&times;</span>{text}' +
+								  			  '</li>', {
+								  			  		text: text,
+								  			  		val: val,
+								  			  		tag: classNames.tag,
+								  			  		popoverClose: classNames.popoverClose
+								  			  });
+		}
+
+		function createPlaceholderInput () {
+
+		}
 
 		// A really lightweight plugin wrapper around the constructor,
 		// preventing against multiple instantiations
