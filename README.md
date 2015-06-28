@@ -48,32 +48,39 @@
 The basic structure of the project is given in the following way:
 
 ```
-├── demo/
-│   └── index.html
-├── dist/
-│   ├── jquery.boilerplate.js
-│   └── jquery.boilerplate.min.js
-├── src/
-│   ├── jquery.boilerplate.coffee
-│   └── jquery.boilerplate.js
-├── .editorconfig
-├── .gitignore
-├── .jshintrc
-├── .travis.yml
-├── boilerplate.jquery.json
+.
+├── dist
+│   ├── jquery.popSelect.js
+│   └── jquery.popSelect.min.js
+├── bower.json
+├── CONTRIBUTING.md
+├── css
+│   ├── libs
+│   │   └── *library css
+│   └── popSelect.css
+├── fonts
+│   └── *library fonts
 ├── Gruntfile.js
-└── package.json
+├── img
+│   └── header.jpg
+├── index.html
+├── package.json
+├── README.md
+└── src
+    ├── jquery.popSelect.js
+    └── libs
+        └── *library css
 ```
 
 ## TODO
 
-- [] Add support for easy themeing.
+- [ ] Add support for easy themeing.
 - [x] Add support for getting value from select.
 - [x] Add support for backspace delete
-- [] Add support for multidirectional popovers.
-- [] Auto-growing textarea
-- [] Add Sorting Options
-- [] Support multiple attribute in select.
+- [ ] Add support for multidirectional popovers.
+- [ ] Auto-growing textarea
+- [ ] Add Sorting Options
+- [ ] Support multiple attribute in select.
 
 #### [demo/](https://github.com/jquery-boilerplate/boilerplate/tree/master/demo)
 
