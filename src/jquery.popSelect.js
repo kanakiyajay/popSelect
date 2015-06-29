@@ -11,28 +11,34 @@
 		// Create the defaults once
 		var pluginName = 'popSelect',
 				defaults = {
+					showTitle: true,
 					title: 'Select Multiple Options',
 					debug: false
 				};
 
 		var classNames = {
 			tag: 'tag',
+			arrow: 'arrow',
 			selectWrapper: 'popover-select-wrapper',
 			tagWrapper: 'popover-tag-wrapper',
 			popoverSelect: 'popover-select',
+			popoverBody: 'popover-select-body',
 			selectTextarea: 'popover-select-textarea',
 			selectTags: 'popover-select-tags',
 			popoverClose: 'popSelect-close',
 			selectList: 'popover-select-list',
 			placeholder: 'placeholder',
 			placeholderInput: 'placeholder input',
-			selectTitle: 'popover-select-title'
+			selectTitle: 'popover-select-title',
+			top: 'top'
 		};
 
 		var logs = {
 			popoverGenerated: 'PopSelect Code Generated',
 			closeClicked: 'Close button clicked',
-			noElem: 'No element to be removed'
+			noElem: 'No element to be removed',
+			unSupported: 'Not Supported',
+			posChanged: 'Position changed'
 		};
 
 		var constants = {
@@ -86,9 +92,6 @@
 						.parent(addDot(classNames.selectWrapper))
 						.css({ width: elemPos.width, height: elemPos.height});
 
-					// Clear the input list
-					this.$elem.empty();
-
 					// Append the popover to $elem
 					var popUpCode = this.generatePopover(this.$options);
 					$this.log(logs.popoverGenerated, popUpCode);
@@ -97,9 +100,6 @@
 					// Assign the $popover to the new $elem
 					this.$popover = this.$elem.next(addDot(classNames.popoverSelect));
 					this.$popover.css({ top: 0, left: 0 });
-
-					// Change
-					this.changePosition();
 
 					// Append Tagging System to it
 					this.$elem.after(createTaggingStr());
@@ -176,7 +176,7 @@
 					if (this.$tags.children(addDot(classNames.placeholder)).length) {
 						this.$tags.children(addDot(classNames.placeholder)).remove();
 					}
-					this.$tags.append('<li class="placeholder"><div><input type="text"></div></li>');
+					this.$tags.append(createPlaceholderInput());
 					this.disableInput();
 				},
 				disableInput: function() {
@@ -190,6 +190,7 @@
 								var $li = $(tags[tags.length - 1]);
 								var val = $li.attr(constants.attrVal);
 								var text = $li.attr(constants.attrText);
+
 								// Remove them from input and add it to popover
 								$this.appendToPopup(val, text);
 								$li.remove();
@@ -205,42 +206,36 @@
 					});
 				},
 				setTitle: function(title) {
-					this.$popover.find('.popover-select-title').text(title);
+					if (this.settings.showTitle) {
+						this.$popover.find(addDot(classNames.selectTitle)).text(title);
+					}
 				},
-				getPosition: function ($element) {
-					$element   = $element || this.$element;
-
-					var el     = $element[0];
+				getPosition: function($element) {
+					$element = $element || this.$element;
+					var el = $element[0];
 					var isBody = el.tagName === constants.body;
 
-					var elRect    = el.getBoundingClientRect();
+					var elRect = el.getBoundingClientRect();
 					if (elRect.width == null) {
 						elRect = $.extend({}, elRect, { width: elRect.right - elRect.left, height: elRect.bottom - elRect.top });
 					}
-					var elOffset  = isBody ? { top: 0, left: 0 } : $element.offset();
+					var elOffset = isBody ? { top: 0, left: 0 } : $element.offset();
 					var scroll = { scroll: isBody ? document.documentElement.scrollTop || document.body.scrollTop : $element.scrollTop() }
 					var outerDims = isBody ? { width: $(window).width(), height: $(window).height() } : null;
 
 					return $.extend({}, elRect, scroll, outerDims, elOffset);
 				},
 				appendToPopup: function(val, text) {
-					var li = '<li data-value="' + val + '">' + text + '</li>';
-					this.$popover.find('.popover-select-list').append(li);
+					var li = createLiTag(val, text);
+					this.$popover.find(addDot(classNames.selectList)).append(li);
 				},
 				generatePopover: function(options) {
 					var list = '';
 					for (var i = 0; i < options.length; i++) {
-						list += '<li data-value="' + options[i].val + '">' + options[i].text + '</li>';
+						list += createLiTag(options[i].val, options[i].text);
 					}
-					return '<div class="popover-select top">\
-										<h3 class="popover-select-title">' + this.settings.title + '</h3>\
-										<div class="popover-select-body">\
-											<ul class="popover-select-list">\
-											' + list + '\
-											</ul>\
-										</div>\
-										<div class="arrow"></div>\
-									</div>';
+					var popoverStr = createPopoverStr(this.settings.title, list, this.settings.showTitle);
+					return popoverStr;
 				},
 				changePosition: function() {
 					// It first needs to be placed
@@ -249,7 +244,8 @@
 					var leftOffset = (this.elemPos.width / 2) - (popPos.width / 2) ;
 					var topOffset = - (popPos.height);
 
-					this.log('position changed', topOffset, leftOffset);
+					this.log('popPos.width', popPos.width);
+					this.log(logs.posChanged, topOffset, leftOffset);
 					this.$popover.css({ top: topOffset, left: leftOffset});
 				},
 				log: function() {
@@ -311,8 +307,42 @@
 								  			  });
 		}
 
-		function createPlaceholderInput () {
+		function createLiTag (val, text) {
+			return template('<li data-value="{val}" data-text="{text}">{text}</li>', {
+													val: val,
+													text: text
+												});
+		}
 
+		function createPlaceholderInput () {
+			return template('<li class="{placeholder}">' +
+												'<div>' +
+													'<input type="text">' +
+												'</div>' +
+											   '</li>', {
+											   	placeholder: classNames.placeholder
+											   });
+		}
+
+		function createPopoverStr (title, list, bool) {
+			return template('<div class="{popoverSelect} {top}">' +
+												(bool ? '<h3 class="{selectTitle}">{title}</h3>' : '') +
+												'<div class="{popoverBody}">' +
+													'<ul class="{selectList}">' +
+														'{list}' +
+													'</ul>' +
+												'</div>' +
+												'<div class="{arrow}"></div>' +
+											'</div>', {
+												title: title,
+												list: list,
+												arrow: classNames.arrow,
+												popoverSelect: classNames.popoverSelect,
+												popoverBody: classNames.popoverBody,
+												selectList: classNames.selectList,
+												top: classNames.top,
+												selectTitle: classNames.selectTitle
+											});
 		}
 
 		// A really lightweight plugin wrapper around the constructor,
@@ -320,16 +350,17 @@
 		$.fn.popSelect = function (options) {
 				if (typeof(options) === 'string') {
 					if (options === 'value') {
-						return this.next('.popover-tag-wrapper').find('li.tag').map(function(i, $elem){
-							return $($elem).attr('data-value');
-						});
+						return this.next(addDot(classNames.tagWrapper))
+											  .find(addDot(classNames.tag)).map(function(i, $elem){
+											     return $($elem).attr(constants.attrVal);
+											  });
 					} else {
-						console.warn('Not Supported');
+						console.warn(logs.unSupported);
 					}
 				} else {
 					return this.each(function() {
-							if (!$.data(this, 'plugin_' + 'popSelect') ) {
-								$.data(this, 'plugin_' + 'popSelect', new Plugin( this, options ) );
+							if (!$.data(this, 'plugin_' + pluginName) ) {
+								$.data(this, 'plugin_' + pluginName, new Plugin( this, options ) );
 							}
 					});
 				}
