@@ -109,6 +109,7 @@
 																	.next(addDot(classNames.tagWrapper))
 																	.find(addDot(classNames.selectTextarea));
 
+					// Hide the poover when blurring the inputTagField
 					this.$inputTagField.on(constants.blur, function() {
 						$this.$popover.hide();
 					});
@@ -118,8 +119,9 @@
 												.next(addDot(classNames.tagWrapper))
 												.find(addDot(classNames.selectTags));
 
+					// Show Popover on click of tags
 					this.$tags.on(constants.click, function() {
-						$this.$popover.show();
+						$this.popoverShow();
 						$this.changePosition();
 						$this.setPlaceholder();
 						$this.focus();
@@ -127,43 +129,55 @@
 
 					// Attach Event Listener to ul list
 					this.$tags.on(constants.click, addDot(classNames.popoverClose), function() {
-						var $li = $(this).parent();
-						$this.log(logs.closeClicked, $li);
-						var val = $li.attr(constants.attrVal);
-						var text = $li.attr(constants.attrText);
-
-						// Remove them from input and add it to popover
-						$this.appendToPopup(val, text);
-						$li.remove();
-
-						// Standard Reset Calls
-						$this.setPlaceholder();
-						$this.focus();
+						$this.inputToPopover($(this));
 					});
 
 					// Attach List Event Handlers to Li
 					this.$popover.find(addDot(classNames.selectList)).on(constants.mousedown, function(e) {
 						e.preventDefault();
 					}).on(constants.click, constants.li, function() {
-						var val = $(this).attr(constants.attrVal);
-						var text = $(this).text();
-						var li = createTagStr(val, text);
-
-						// Remove them from popover and it to input
-						$this.$tags.append(li);
-						$(this).remove();
-
-						// Standard Reset Calls
-						$this.setPlaceholder();
-						$this.focus();
-
-						// Change Position as well show popover
-						$this.$popover.show();
-						$this.changePosition();
+						$this.popoverToInput($(this));
 					});
 
 					// Finally Hide the Element
 					this.$elem.hide();
+				},
+				inputToPopover: function($elem) {
+					var $li = $elem.parent();
+					this.log(logs.closeClicked, $li);
+					var val = $li.attr(constants.attrVal);
+					var text = $li.attr(constants.attrText);
+
+					// Remove them from input and add it to popover
+					this.appendToPopup(val, text);
+					$li.remove();
+
+					// Standard Reset Calls
+					this.setPlaceholder();
+					this.focus();
+				},
+				popoverToInput: function($elem) {
+					var val = $elem.attr(constants.attrVal);
+					var text = $elem.text();
+					var li = createTagStr(val, text);
+
+					// Remove them from popover and it to input
+					this.$tags.append(li);
+					$elem.remove();
+
+					// Standard Reset Calls
+					this.setPlaceholder();
+					this.focus();
+					this.popoverShow();
+					this.changePosition();
+				},
+				popoverShow: function() {
+					// Change Position as well show popover
+					if (this.$popover.find(addDot(classNames.selectList) + ' li').length) {
+						this.$popover.show();
+					} else {
+						this.$popover.hide();
+					}
 				},
 				focus: function() {
 					var $this = this;
@@ -182,28 +196,34 @@
 				disableInput: function() {
 					var $this = this;
 					this.$tags.find(addDot(classNames.placeholderInput)).keyup(function(e) {
+						// Empty the input always
 						$(this).val('');
+
+						// For delete key, backspace and Ctrl + x Key
 						if (e.which === 8 || e.which === 46 || e.ctrlKey && e.which === 88) {
-							// Delete the last selected li if present
-							var tags = $this.$tags.find(addDot(classNames.tag));
-							if (tags.length) {
-								var $li = $(tags[tags.length - 1]);
-								var val = $li.attr(constants.attrVal);
-								var text = $li.attr(constants.attrText);
-
-								// Remove them from input and add it to popover
-								$this.appendToPopup(val, text);
-								$li.remove();
-
-								// Standard Reset Calls
-								$this.changePosition();
-								$this.setPlaceholder();
-								$this.focus();
-							} else {
-								$this.log(logs.noElem);
-							}
+							$this.removeLastElem();
 						}
 					});
+				},
+				removeLastElem: function() {
+					// Delete the last selected li if present
+					var tags = this.$tags.find(addDot(classNames.tag));
+					if (tags.length) {
+						var $li = $(tags[tags.length - 1]);
+						var val = $li.attr(constants.attrVal);
+						var text = $li.attr(constants.attrText);
+
+						// Remove them from input and add it to popover
+						this.appendToPopup(val, text);
+						$li.remove();
+
+						// Standard Reset Calls
+						this.changePosition();
+						this.setPlaceholder();
+						this.focus();
+					} else {
+						this.log(logs.noElem);
+					}
 				},
 				setTitle: function(title) {
 					if (this.settings.showTitle) {
