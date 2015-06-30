@@ -11,6 +11,7 @@
   // Create the defaults once
   var pluginName = 'popSelect';
   var defaults = {
+    position: 'top',
     showTitle: true,
     title: 'Select Multiple Options',
     debug: false
@@ -104,20 +105,19 @@
      // Append Tagging System to it
      this.$elem.after(createTaggingStr());
 
+     // Get the Tag Wrapper for later use
+     this.$tagWrapper = this.$elem.next(addDot(classNames.tagWrapper));
+
      // Get the input
-     this.$inputTagField = this.$elem
-                 .next(addDot(classNames.tagWrapper))
-                 .find(addDot(classNames.selectTextarea));
+     this.$inputTagField = this.$tagWrapper.find(addDot(classNames.selectTextarea));
 
      // Hide the poover when blurring the inputTagField
      this.$inputTagField.on(constants.blur, function() {
        $this.$popover.hide();
      });
 
-     // Get the tagging wrapper
-     this.$tags = this.$elem
-            .next(addDot(classNames.tagWrapper))
-            .find(addDot(classNames.selectTags));
+     // Get the tags in the wrapper
+     this.$tags = this.$tagWrapper.find(addDot(classNames.selectTags));
 
      // Show Popover on click of tags
      this.$tags.on(constants.click, function() {
@@ -256,15 +256,21 @@
       for (var i = 0; i < options.length; i++) {
         list += createLiTag(options[i].val, options[i].text);
       }
-      var popoverStr = createPopoverStr(this.settings.title, list, this.settings.showTitle);
+      var popoverStr = createPopoverStr(this.settings.title, list, this.settings.showTitle, this.settings.position);
       return popoverStr;
     },
     changePosition: function() {
       // It first needs to be placed
       var popPos = this.getPosition(this.$popover);
+      var tagPos = this.getPosition(this.$tagWrapper);
 
-      var leftOffset = (this.elemPos.width / 2) - (popPos.width / 2) ;
-      var topOffset = -(popPos.height);
+      var leftOffset = (this.elemPos.width / 2) - (popPos.width / 2);
+      var topOffset;
+      if (this.settings.position === 'top') {
+        topOffset = -(popPos.height);
+      } else {
+        topOffset = tagPos.height;
+      }
 
       this.log('popPos.width', popPos.width);
       this.log(logs.posChanged, topOffset, leftOffset);
@@ -347,7 +353,7 @@
               });
   }
 
-  function createPopoverStr(title, list, bool) {
+  function createPopoverStr(title, list, bool, position) {
     return template('<div class="{popoverSelect} {top}">' +
              (bool ? '<h3 class="{selectTitle}">{title}</h3>' : '') +
              '<div class="{popoverBody}">' +
@@ -363,7 +369,7 @@
              popoverSelect: classNames.popoverSelect,
              popoverBody: classNames.popoverBody,
              selectList: classNames.selectList,
-             top: classNames.top,
+             top: position,
              selectTitle: classNames.selectTitle
            });
   }
