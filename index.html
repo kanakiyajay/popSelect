@@ -1,337 +1,340 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>PopSelect | A jQuery plugin to replace select with popover</title>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="PopSelect is a jQuery plugin to replace the traditional multiselect with a sleek looking popover">
-        <meta name="keywords" content="jQuery, jQuery plugin, javascript library">
-        <meta name="author" content="Jay Kanakiya">
 
-        <link rel="stylesheet" href="css/libs/bootstrap.css">
-        <link rel="stylesheet" href="css/libs/font-awesome.min.css">
-        <link rel="stylesheet" href="css/libs/animate.min.css">
-        <link rel="stylesheet" href="css/libs/creative.css">
+<head>
+  <title>PopSelect | A jQuery plugin to replace select with popover</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="PopSelect is a jQuery plugin to replace the traditional multiselect with a sleek looking popover">
+  <meta name="keywords" content="jQuery, jQuery plugin, javascript library">
+  <meta name="author" content="Jay Kanakiya">
 
-        <!-- popSelect -->
-        <link rel="stylesheet" href="css/popSelect.css">
+  <link rel="stylesheet" href="css/libs/bootstrap.css">
+  <link rel="stylesheet" href="css/libs/font-awesome.min.css">
+  <link rel="stylesheet" href="css/libs/animate.min.css">
+  <link rel="stylesheet" href="css/libs/creative.css">
 
-        <!-- Custom Fonts
+  <!-- popSelect -->
+  <link rel="stylesheet" href="css/popSelect.css">
+
+  <!-- Custom Fonts
         <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
         <link href='http://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
         -->
-    </head>
+</head>
+
 <body id="page-top">
 
-    <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
-        <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#toggle-navbar">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand page-scroll" href="#page-top">PopSelect jQuery plugin</a>
-            </div>
+  <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#toggle-navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand page-scroll" href="#page-top">PopSelect jQuery plugin</a>
+      </div>
 
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="toggle-navbar">
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a class="page-scroll" href="#about">About</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="#examples">Examples</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="#docs">Documentation</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="#contact">Contact</a>
-                    </li>
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container-fluid -->
-    </nav>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="toggle-navbar">
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <a class="page-scroll" href="#about">About</a>
+          </li>
+          <li>
+            <a class="page-scroll" href="#examples">Examples</a>
+          </li>
+          <li>
+            <a class="page-scroll" href="#docs">Documentation</a>
+          </li>
+          <li>
+            <a class="page-scroll" href="#contact">Contact</a>
+          </li>
+        </ul>
+      </div>
+      <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-fluid -->
+  </nav>
 
-    <header>
-        <div class="header-content">
-            <div class="header-content-inner">
-                <h1>Replace &lt;select&gt; with sleek looking popovers</h1>
-                <hr>
-                <p>A jQuery plugin to replace the traditional &lt;select&gt; box with a sleek Popover with options pre-populated. Better User interface than any other multiselects</p>
-                <form class="form form-horizontal">
-                    <div class="form-group m-t-4xl">
-                        <div class="col-xs-12">
-                            <div class="center-block" id="main-example-container">
+  <header>
+    <div class="header-content">
+      <div class="header-content-inner">
+        <h1>Replace &lt;select&gt; with sleek looking popovers</h1>
+        <hr>
+        <p>A jQuery plugin to replace the traditional &lt;select&gt; box with a sleek Popover with options pre-populated. Better User interface than any other multiselects</p>
+        <form class="form form-horizontal">
+          <div class="form-group m-t-4xl">
+            <div class="col-xs-12">
+              <div class="center-block" id="main-example-container">
                 <select name="main-example" id="main-example" class="form-control">
-                    <option value="India">India</option>
-                    <option value="US">U.S.</option>
-                    <option value="Germany">Germany</option>
-                    <option value="UK">UK</option>
-                    <option value="Austrailia">Austrailia</option>
+                  <option value="India">India</option>
+                  <option value="US">U.S.</option>
+                  <option value="Germany">Germany</option>
+                  <option value="UK">UK</option>
+                  <option value="Austrailia">Austrailia</option>
                 </select>
-                            </div>
-                        </div>
-                    </div>
-                </form>
+              </div>
             </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </header>
+
+  <section class="bg-primary" id="about">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 text-center">
+          <h2 class="section-heading">PopSelect solves a simple problem.</h2>
+          <hr class="light">
+          <p class="text-faded">Its fully responsive, works great out of the box, easily themable, integrates with bootstrap easily</p>
+          <a href="#docs" class="btn btn-default btn-xl">See the docs!</a>
         </div>
-    </header>
+      </div>
+    </div>
+  </section>
 
-    <section class="bg-primary" id="about">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 text-center">
-                    <h2 class="section-heading">PopSelect solves a simple problem.</h2>
-                    <hr class="light">
-                    <p class="text-faded">Its fully responsive, works great out of the box, easily themable, integrates with bootstrap easily</p>
-                    <a href="#docs" class="btn btn-default btn-xl">See the docs!</a>
-                </div>
-            </div>
+  <section id="examples">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 text-center">
+          <h2 class="section-heading">Mobile-ready</h2>
+          <hr class="primary">
         </div>
-    </section>
-
-    <section id="examples">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">Mobile-ready</h2>
-                    <hr class="primary">
-                </div>
-            </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-3 col-md-6 text-center">
+          <div class="service-box">
+            <i class="fa fa-4x fa-diamond wow bounceIn text-primary"></i>
+            <h3>Easily</h3>
+            <p class="text-muted">Our templates are updated regularly so they don't break.</p>
+          </div>
         </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3 col-md-6 text-center">
-                    <div class="service-box">
-                        <i class="fa fa-4x fa-diamond wow bounceIn text-primary"></i>
-                        <h3>Easily</h3>
-                        <p class="text-muted">Our templates are updated regularly so they don't break.</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 text-center">
-                    <div class="service-box">
-                        <i class="fa fa-4x fa-paper-plane wow bounceIn text-primary" data-wow-delay=".1s"></i>
-                        <h3>Ready to Ship</h3>
-                        <p class="text-muted">You can use this theme as is, or you can make changes!</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 text-center">
-                    <div class="service-box">
-                        <i class="fa fa-4x fa-newspaper-o wow bounceIn text-primary" data-wow-delay=".2s"></i>
-                        <h3>Up to Date</h3>
-                        <p class="text-muted">We update dependencies to keep things fresh.</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 text-center">
-                    <div class="service-box">
-                        <i class="fa fa-4x fa-heart wow bounceIn text-primary" data-wow-delay=".3s"></i>
-                        <h3>Made with Love</h3>
-                        <p class="text-muted">You have to make your websites with love these days!</p>
-                    </div>
-                </div>
-            </div>
+        <div class="col-lg-3 col-md-6 text-center">
+          <div class="service-box">
+            <i class="fa fa-4x fa-paper-plane wow bounceIn text-primary" data-wow-delay=".1s"></i>
+            <h3>Ready to Ship</h3>
+            <p class="text-muted">You can use this theme as is, or you can make changes!</p>
+          </div>
         </div>
-    </section>
-
-    <section class="no-padding" id="docs">
-        <div class="container-fluid">
-            <div class="row no-gutter">
-                <div class="col-lg-4 col-sm-6">
-                    <a href="#" class="portfolio-box">
-                        <!--<img src="img/portfolio/1.jpg" class="img-responsive" alt="">-->
-                        <div class="portfolio-box-caption">
-                            <div class="portfolio-box-caption-content">
-                                <div class="project-category text-faded">
-                                    Category
-                                </div>
-                                <div class="project-name">
-                                    Project Name
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-4 col-sm-6">
-                    <a href="#" class="portfolio-box">
-                        <!--<img src="img/portfolio/2.jpg" class="img-responsive" alt="">-->
-                        <div class="portfolio-box-caption">
-                            <div class="portfolio-box-caption-content">
-                                <div class="project-category text-faded">
-                                    Category
-                                </div>
-                                <div class="project-name">
-                                    Project Name
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-4 col-sm-6">
-                    <a href="#" class="portfolio-box">
-                        <!--<img src="img/portfolio/3.jpg" class="img-responsive" alt="">-->
-                        <div class="portfolio-box-caption">
-                            <div class="portfolio-box-caption-content">
-                                <div class="project-category text-faded">
-                                    Category
-                                </div>
-                                <div class="project-name">
-                                    Project Name
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-4 col-sm-6">
-                    <a href="#" class="portfolio-box">
-                        <!--<img src="img/portfolio/4.jpg" class="img-responsive" alt="">-->
-                        <div class="portfolio-box-caption">
-                            <div class="portfolio-box-caption-content">
-                                <div class="project-category text-faded">
-                                    Category
-                                </div>
-                                <div class="project-name">
-                                    Project Name
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-4 col-sm-6">
-                    <a href="#" class="portfolio-box">
-                        <!--<img src="img/portfolio/5.jpg" class="img-responsive" alt="">-->
-                        <div class="portfolio-box-caption">
-                            <div class="portfolio-box-caption-content">
-                                <div class="project-category text-faded">
-                                    Category
-                                </div>
-                                <div class="project-name">
-                                    Project Name
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-4 col-sm-6">
-                    <a href="#" class="portfolio-box">
-                        <!--<img src="img/portfolio/6.jpg" class="img-responsive" alt="">-->
-                        <div class="portfolio-box-caption">
-                            <div class="portfolio-box-caption-content">
-                                <div class="project-category text-faded">
-                                    Category
-                                </div>
-                                <div class="project-name">
-                                    Project Name
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            </div>
+        <div class="col-lg-3 col-md-6 text-center">
+          <div class="service-box">
+            <i class="fa fa-4x fa-newspaper-o wow bounceIn text-primary" data-wow-delay=".2s"></i>
+            <h3>Up to Date</h3>
+            <p class="text-muted">We update dependencies to keep things fresh.</p>
+          </div>
         </div>
-    </section>
-
-    <aside class="bg-dark">
-        <div class="container text-center">
-            <div class="call-to-action">
-                <h2>jQuery PopSelect is Open Source</h2>
-                <a href="https://github.com/kanakiyajay/popSelect/archive/master.zip" class="btn btn-default btn-xl wow tada">Download Now!</a>
-            </div>
+        <div class="col-lg-3 col-md-6 text-center">
+          <div class="service-box">
+            <i class="fa fa-4x fa-heart wow bounceIn text-primary" data-wow-delay=".3s"></i>
+            <h3>Made with Love</h3>
+            <p class="text-muted">You have to make your websites with love these days!</p>
+          </div>
         </div>
-    </aside>
+      </div>
+    </div>
+  </section>
 
-    <section id="contact">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 text-center">
-                    <h2 class="section-heading">Let's Get In Touch!</h2>
-                    <hr class="primary">
-                    <p>Have some Feedback to share ? Some bug to report ? Contact me below</p>
+  <section class="no-padding" id="docs">
+    <div class="container-fluid">
+      <div class="row no-gutter">
+        <div class="col-lg-4 col-sm-6">
+          <a href="#" class="portfolio-box">
+            <!--<img src="img/portfolio/1.jpg" class="img-responsive" alt="">-->
+            <div class="portfolio-box-caption">
+              <div class="portfolio-box-caption-content">
+                <div class="project-category text-faded">
+                  Category
                 </div>
-                <div class="col-lg-4 col-lg-offset-2 text-center">
-                    <i class="fa fa-twitter fa-3x wow bounceIn"></i>
-                    <p><a href="https://twitter.com/techiejayk" title="FED Pune" target="_blank">@techiejayk</a></p>
+                <div class="project-name">
+                  Project Name
                 </div>
-                <div class="col-lg-4 text-center">
-                    <i class="fa fa-envelope-o fa-3x wow bounceIn" data-wow-delay=".1s"></i>
-                    <p><a href="mailto:kanakiyajay@gmail.com" title="mail jaykanakiya">kanakiyajay@gmail.com</a></p>
-                </div>
+              </div>
             </div>
-            <div class="row">
-                <div class="col-lg-4 col-lg-offset-2 text-center">
-                    <i class="fa fa-website fa-3x bounceIn wow"></i>
-                    <p><a href="http://jaykanakiya.com/" title="Jay Kanakiya">Website</a></p>
-                </div>
-                <div class="col-lg-4 text-center">
-                    <i class="fa fa-github fa-3x wow bounceIn"></i>
-                    <p><a href="https://github.com/kanakiyajay/">Github</a></p>
-                </div>
-            </div>
+          </a>
         </div>
-    </section>
-
-    <aside id="links">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 text-center">
-                    <h2 class="section-heading">You might also be interested in:</h2>
-                    <hr class="primary">
+        <div class="col-lg-4 col-sm-6">
+          <a href="#" class="portfolio-box">
+            <!--<img src="img/portfolio/2.jpg" class="img-responsive" alt="">-->
+            <div class="portfolio-box-caption">
+              <div class="portfolio-box-caption-content">
+                <div class="project-category text-faded">
+                  Category
                 </div>
-                <div class="col-lg-3">
-                    <div class="service-box">
-                        <h4 class="text-center"><a href="http://jquer.in/">jQuery plugins</a></h4>
-                    </div>
+                <div class="project-name">
+                  Project Name
                 </div>
-                <div class="col-lg-3">
-                    <div class="service-box">
-                        <h4 class="text-center"><a href="http://angular-js.in/">Angular Directives</a></h4>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="service-box">
-                        <h4 class="text-center"><a href="http://web-components.in/">Web Components</a></h4>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="service-box">
-                        <h4 class="text-center"><a href="http://grunt-tasks.com/">Grunt Tasks</a></h4>
-                    </div>
-                </div>
+              </div>
             </div>
+          </a>
         </div>
-    </aside>
+        <div class="col-lg-4 col-sm-6">
+          <a href="#" class="portfolio-box">
+            <!--<img src="img/portfolio/3.jpg" class="img-responsive" alt="">-->
+            <div class="portfolio-box-caption">
+              <div class="portfolio-box-caption-content">
+                <div class="project-category text-faded">
+                  Category
+                </div>
+                <div class="project-name">
+                  Project Name
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="col-lg-4 col-sm-6">
+          <a href="#" class="portfolio-box">
+            <!--<img src="img/portfolio/4.jpg" class="img-responsive" alt="">-->
+            <div class="portfolio-box-caption">
+              <div class="portfolio-box-caption-content">
+                <div class="project-category text-faded">
+                  Category
+                </div>
+                <div class="project-name">
+                  Project Name
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="col-lg-4 col-sm-6">
+          <a href="#" class="portfolio-box">
+            <!--<img src="img/portfolio/5.jpg" class="img-responsive" alt="">-->
+            <div class="portfolio-box-caption">
+              <div class="portfolio-box-caption-content">
+                <div class="project-category text-faded">
+                  Category
+                </div>
+                <div class="project-name">
+                  Project Name
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="col-lg-4 col-sm-6">
+          <a href="#" class="portfolio-box">
+            <!--<img src="img/portfolio/6.jpg" class="img-responsive" alt="">-->
+            <div class="portfolio-box-caption">
+              <div class="portfolio-box-caption-content">
+                <div class="project-category text-faded">
+                  Category
+                </div>
+                <div class="project-name">
+                  Project Name
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <!-- jQuery -->
-    <script src="src/libs/jquery.js"></script>
+  <aside class="bg-dark">
+    <div class="container text-center">
+      <div class="call-to-action">
+        <h2>jQuery PopSelect is Open Source</h2>
+        <a href="https://github.com/kanakiyajay/popSelect/archive/master.zip" class="btn btn-default btn-xl wow tada">Download Now!</a>
+      </div>
+    </div>
+  </aside>
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="src/libs/bootstrap.min.js"></script>
+  <section id="contact">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 text-center">
+          <h2 class="section-heading">Let's Get In Touch!</h2>
+          <hr class="primary">
+          <p>Have some Feedback to share ? Some bug to report ? Contact me below</p>
+        </div>
+        <div class="col-lg-4 col-lg-offset-2 text-center">
+          <i class="fa fa-twitter fa-3x wow bounceIn"></i>
+          <p><a href="https://twitter.com/techiejayk" title="FED Pune" target="_blank">@techiejayk</a></p>
+        </div>
+        <div class="col-lg-4 text-center">
+          <i class="fa fa-envelope-o fa-3x wow bounceIn" data-wow-delay=".1s"></i>
+          <p><a href="mailto:kanakiyajay@gmail.com" title="mail jaykanakiya">kanakiyajay@gmail.com</a></p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-4 col-lg-offset-2 text-center">
+          <i class="fa fa-website fa-3x bounceIn wow"></i>
+          <p><a href="http://jaykanakiya.com/" title="Jay Kanakiya">Website</a></p>
+        </div>
+        <div class="col-lg-4 text-center">
+          <i class="fa fa-github fa-3x wow bounceIn"></i>
+          <p><a href="https://github.com/kanakiyajay/">Github</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <!-- Plugin JavaScript -->
-    <script src="src/libs/jquery.easing.min.js"></script>
-    <script src="src/libs/jquery.fittext.js"></script>
-    <script src="src/libs/wow.min.js"></script>
+  <aside id="links">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 text-center">
+          <h2 class="section-heading">You might also be interested in:</h2>
+          <hr class="primary">
+        </div>
+        <div class="col-lg-3">
+          <div class="service-box">
+            <h4 class="text-center"><a href="http://jquer.in/">jQuery plugins</a></h4>
+          </div>
+        </div>
+        <div class="col-lg-3">
+          <div class="service-box">
+            <h4 class="text-center"><a href="http://angular-js.in/">Angular Directives</a></h4>
+          </div>
+        </div>
+        <div class="col-lg-3">
+          <div class="service-box">
+            <h4 class="text-center"><a href="http://web-components.in/">Web Components</a></h4>
+          </div>
+        </div>
+        <div class="col-lg-3">
+          <div class="service-box">
+            <h4 class="text-center"><a href="http://grunt-tasks.com/">Grunt Tasks</a></h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
 
-    <!-- Custom Theme JavaScript -->
-    <script src="src/libs/creative.js"></script>
+  <!-- jQuery -->
+  <script src="src/libs/jquery.js"></script>
 
-    <!-- popSelect jQuery plugin -->
-    <script src="src/jquery.popSelect.js"></script>
+  <!-- Bootstrap Core JavaScript -->
+  <script src="src/libs/bootstrap.min.js"></script>
 
-    <!-- Initilization Scripts -->
-    <script>
-        $(document).ready(function() {
-            $('#main-example').popSelect({
-                debug: true,
-                showTitle: false
-            });
-        });
-    </script>
+  <!-- Plugin JavaScript -->
+  <script src="src/libs/jquery.easing.min.js"></script>
+  <script src="src/libs/jquery.fittext.js"></script>
+  <script src="src/libs/wow.min.js"></script>
+
+  <!-- Custom Theme JavaScript -->
+  <script src="src/libs/creative.js"></script>
+
+  <!-- popSelect jQuery plugin -->
+  <script src="src/jquery.popSelect.js"></script>
+
+  <!-- Initilization Scripts -->
+  <script>
+    $(document).ready(function() {
+      $('#main-example').popSelect({
+        debug: true,
+        showTitle: false
+      });
+    });
+  </script>
 </body>
+
 </html>
