@@ -13,6 +13,7 @@
   var defaults = {
     position: 'top',
     showTitle: true,
+    autoIncrease: true,
     title: 'Select Multiple Options',
     debug: false
   };
@@ -91,7 +92,7 @@
      // Also Add the required css Properties
      this.$elem
       .parent(addDot(classNames.selectWrapper))
-      .css({width: elemPos.width, height: elemPos.height});
+      .css({width: this.settings.width || elemPos.width, height: elemPos.height});
 
      // Append the popover to $elem
      var popUpCode = this.generatePopover(this.$options);
@@ -107,6 +108,7 @@
 
      // Get the Tag Wrapper for later use
      this.$tagWrapper = this.$elem.next(addDot(classNames.tagWrapper));
+     this.baseHeight = this.$tagWrapper.height();
 
      // Get the input
      this.$inputTagField = this.$tagWrapper.find(addDot(classNames.selectTextarea));
@@ -155,6 +157,9 @@
       // Standard Reset Calls
       this.setPlaceholder();
       this.focus();
+
+      // Whether to increase/decrease width
+      this.changeSize();
     },
     popoverToInput: function($elem) {
       var val = $elem.attr(constants.attrVal);
@@ -170,6 +175,9 @@
       this.focus();
       this.popoverShow();
       this.changePosition();
+
+      // Whether to increase/decrease width
+      this.changeSize();
     },
     popoverShow: function() {
       // Change Position as well show popover
@@ -205,6 +213,17 @@
         }
       });
     },
+    changeSize: function() {
+      if (this.settings.autoIncrease) {
+        var tagWidth = 0;
+        var textWidth = this.settings.width || this.elemPos.width;
+        this.$tags.find(addDot(classNames.tag)).each(function(i, elem) {
+          tagWidth += $(elem).outerWidth() + 20;
+        });
+        var mHeight = Math.floor(tagWidth / textWidth);
+        this.$tags.height((mHeight + 1) * this.baseHeight);
+      }
+    },
     removeLastElem: function() {
       // Delete the last selected li if present
       var tags = this.$tags.find(addDot(classNames.tag));
@@ -221,6 +240,9 @@
         this.changePosition();
         this.setPlaceholder();
         this.focus();
+
+        // Whether to increase/decrease width
+        this.changeSize();
       } else {
         this.log(logs.noElem);
       }
@@ -264,7 +286,7 @@
       var popPos = this.getPosition(this.$popover);
       var tagPos = this.getPosition(this.$tagWrapper);
 
-      var leftOffset = (this.elemPos.width / 2) - (popPos.width / 2);
+      var leftOffset = ((this.settings.width || this.elemPos.width) / 2) - (popPos.width / 2);
       var topOffset;
       if (this.settings.position === 'top') {
         topOffset = -(popPos.height);

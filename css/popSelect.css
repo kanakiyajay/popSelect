@@ -192,6 +192,7 @@
   vertical-align: middle;
   -webkit-transition: 0.25s linear;
   transition: 0.25s linear;
+  height: 30px;
 }
 
 .popover-select-tags .tag:hover {

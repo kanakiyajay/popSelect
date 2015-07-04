@@ -74,11 +74,11 @@ The basic structure of the project is given in the following way:
 
 ## TODO
 
-- [ ] Add support for easy themeing.
+- [ ] Add support for easy theming.
 - [x] Add support for getting value from select.
 - [x] Add support for backspace delete
-- [ ] Add support for multidirectional popovers.
-- [ ] Auto-growing textarea
+- [x] Add support for multidirectional popovers.
+- [x] Auto-growing textarea
 - [ ] Add Sorting Options
 - [ ] Support multiple attribute in select.
 
