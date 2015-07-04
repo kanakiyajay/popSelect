@@ -479,6 +479,10 @@ body {
     max-width: 500px;
 }
 
-#main-example {
+.service-box .select-container {
+    padding: 35px 0;
+}
 
+#example1, #example2 {
+    width: 400px;
 }

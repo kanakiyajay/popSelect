@@ -113,11 +113,13 @@
       <div class="row">
         <div class="col-md-6 text-center">
           <div class="service-box">
+            <p class="example-heading">With Max Allowed upto 2</p>
             <div class="code">
               <pre>
 <code class="language-javascript">
-$(document).ready(function() {
-  $('#example1').popSelect();
+$('#example1').popSelect({
+  showTitle: false,
+  maxAllowed: 2
 });
 </code>
               </pre>
@@ -126,7 +128,6 @@ $(document).ready(function() {
         </div>
         <div class="col-md-6 text-center">
           <div class="service-box">
-            <p class="example-heading">Basic</p>
             <div class="select-container">
               <select id="example1" multiple>
                 <option value="labrador">Labrador</option>
@@ -134,6 +135,38 @@ $(document).ready(function() {
                 <option value="bulldog">Bulldog</option>
                 <option value="poodle">Poodle</option>
                 <option value="siberian-husky">Siberian Husky</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-md-6 text-center">
+          <div class="service-box">
+          <p class="example-heading">With Popover placed at the bottom</p>
+            <div class="code">
+              <pre>
+<code class="language-javascript">
+$('#example2').popSelect({
+  showTitle: false,
+  placeholderText: 'Click to Add More',
+  position: 'bottom'
+});
+</code>
+              </pre>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 text-center">
+          <div class="service-box">
+            <div class="select-container">
+              <select id="example2" multiple>
+                <option value="game-of-thrones">Game Of Thrones</option>
+                <option value="prison-break">Prison Break</option>
+                <option value="lost">Lost</option>
+                <option value="sherlock-holmes">Sherlock Holmes</option>
+                <option value="true-detectives">True Detectives</option>
               </select>
             </div>
           </div>
@@ -189,11 +222,17 @@ $(document).ready(function() {
               <td>false</td>
               <td>Whether to show a Title in the popover box</td>
             </tr>
+             <tr>
+              <td>showTitle</td>
+              <td>boolean</td>
+              <td>false</td>
+              <td>Whether to show a Title in the popover box</td>
+            </tr>
             <tr>
-              <td>title</td>
+              <td>placeholderText</td>
               <td>string</td>
-              <td>'Select multiple Options'</td>
-              <td>If showTitle is true, then which message to show inside the popover</td>
+              <td>'Click to Add Values'</td>
+              <td>The Placeholder text that is shown in the texarea before the tags are clicked</td>
             </tr>
             <tr>
               <td>debug</td>
@@ -301,15 +340,20 @@ $(document).ready(function() {
 
       // The Main Example on the Top
       $('#main-example').popSelect({
-        //debug: true,
-        showTitle: false,
-        position: 'bottom'
+        showTitle: false
       });
 
-      // Example 1: Basic Example
+      // Example 1: With Max Allowed
       $('#example1').popSelect({
-        width: 400,
+        showTitle: false,
         maxAllowed: 2
+      });
+
+      // With Bottom Popover
+      $('#example2').popSelect({
+        showTitle: false,
+        placeholderText: 'Click to Add More',
+        position: 'bottom'
       });
 
     });
