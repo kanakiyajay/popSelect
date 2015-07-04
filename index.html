@@ -11,6 +11,7 @@
   <meta name="author" content="Jay Kanakiya">
 
   <link rel="stylesheet" href="css/libs/bootstrap.css">
+  <link rel="stylesheet" href="css/libs/prism.css">
   <link rel="stylesheet" href="css/libs/font-awesome.min.css">
   <link rel="stylesheet" href="css/libs/animate.min.css">
   <link rel="stylesheet" href="css/libs/creative.css">
@@ -114,11 +115,11 @@
           <div class="service-box">
             <div class="code">
               <pre>
-                <code>
+<code class="language-javascript">
 $(document).ready(function() {
   $('#example1').popSelect();
 });
-                </code>
+</code>
               </pre>
             </div>
           </div>
@@ -169,6 +170,12 @@ $(document).ready(function() {
               <td>string</td>
               <td>'top'</td>
               <td>Currently Supports top and bottom positions</td>
+            </tr>
+            <tr>
+              <td>maxAllowed</td>
+              <td>number</td>
+              <td>0</td>
+              <td>The maximum number of tags that are allowed inside the textarea. After which the tags inside the popover are disabled. Keep 0 removing any limit</td>
             </tr>
             <tr>
               <td>autoIncrease</td>
@@ -280,6 +287,7 @@ $(document).ready(function() {
   <script src="src/libs/jquery.easing.min.js"></script>
   <script src="src/libs/jquery.fittext.js"></script>
   <script src="src/libs/wow.min.js"></script>
+  <script src="src/libs/prism.js"></script>
 
   <!-- Custom Theme JavaScript -->
   <script src="src/libs/creative.js"></script>
@@ -300,7 +308,8 @@ $(document).ready(function() {
 
       // Example 1: Basic Example
       $('#example1').popSelect({
-        width: 400
+        width: 400,
+        maxAllowed: 2
       });
 
     });
