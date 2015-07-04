@@ -274,4 +274,11 @@ textarea.popover-select-textarea {
   color: white;
   background-color: #ec7063;
   border-color: #ec7063;
-};
+}
+
+/* Disable Tags inside a Popover */
+
+.popover-select-list li.disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}

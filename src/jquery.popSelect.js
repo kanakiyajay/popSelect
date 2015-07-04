@@ -15,7 +15,8 @@
     showTitle: true,
     autoIncrease: true,
     title: 'Select Multiple Options',
-    debug: false
+    debug: false,
+    maxAllowed: 0
   };
 
   var classNames = {
@@ -29,6 +30,7 @@
     selectTags: 'popover-select-tags',
     popoverClose: 'popSelect-close',
     selectList: 'popover-select-list',
+    popoverDisabled: 'disabled',
     placeholder: 'placeholder',
     placeholderInput: 'placeholder input',
     selectTitle: 'popover-select-title',
@@ -160,6 +162,25 @@
 
       // Whether to increase/decrease width
       this.changeSize();
+
+      // Whether to enable / disable popover
+      this.checkMaximumSelected();
+    },
+    enablePopover: function() {
+      this.$popover.find(addDot(classNames.selectList) + ' li').removeClass(classNames.popoverDisabled);
+    },
+    disablePopover: function() {
+      this.$popover.find(addDot(classNames.selectList) + ' li').addClass(classNames.popoverDisabled);
+    },
+    checkMaximumSelected: function() {
+      if (this.settings.maxAllowed !== 0) {
+        var currentNo = this.$tags.find(addDot(classNames.tag)).length;
+        if (this.settings.maxAllowed > currentNo) {
+          this.enablePopover();
+        } else {
+          this.disablePopover();
+        }
+      }
     },
     popoverToInput: function($elem) {
       var val = $elem.attr(constants.attrVal);
@@ -178,6 +199,9 @@
 
       // Whether to increase/decrease width
       this.changeSize();
+
+      // Enable / Disable Popover
+      this.checkMaximumSelected();
     },
     popoverShow: function() {
       // Change Position as well show popover
@@ -243,6 +267,9 @@
 
         // Whether to increase/decrease width
         this.changeSize();
+
+        // Enable / Disable Popover
+        this.checkMaximumSelected();
       } else {
         this.log(logs.noElem);
       }

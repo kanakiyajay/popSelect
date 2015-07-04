@@ -80,7 +80,8 @@ The basic structure of the project is given in the following way:
 - [x] Add support for multidirectional popovers.
 - [x] Auto-growing textarea
 - [ ] Add Sorting Options
-- [ ] Support multiple attribute in select.
+- [x] Add Support for setting maxAllowed input tags
+- [ ] Better Touch Handling
 
 #### [demo/](https://github.com/jquery-boilerplate/boilerplate/tree/master/demo)
 
