@@ -103,138 +103,99 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-12 text-center">
-          <h2 class="section-heading">Mobile-ready</h2>
+          <h2 class="section-heading">Examples</h2>
           <hr class="primary">
         </div>
       </div>
     </div>
     <div class="container">
       <div class="row">
-        <div class="col-lg-3 col-md-6 text-center">
+        <div class="col-md-6 text-center">
           <div class="service-box">
-            <i class="fa fa-4x fa-diamond wow bounceIn text-primary"></i>
-            <h3>Easily</h3>
-            <p class="text-muted">Our templates are updated regularly so they don't break.</p>
+            <div class="code">
+              <pre>
+                <code>
+$(document).ready(function() {
+  $('#example1').popSelect();
+});
+                </code>
+              </pre>
+            </div>
           </div>
         </div>
-        <div class="col-lg-3 col-md-6 text-center">
+        <div class="col-md-6 text-center">
           <div class="service-box">
-            <i class="fa fa-4x fa-paper-plane wow bounceIn text-primary" data-wow-delay=".1s"></i>
-            <h3>Ready to Ship</h3>
-            <p class="text-muted">You can use this theme as is, or you can make changes!</p>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-6 text-center">
-          <div class="service-box">
-            <i class="fa fa-4x fa-newspaper-o wow bounceIn text-primary" data-wow-delay=".2s"></i>
-            <h3>Up to Date</h3>
-            <p class="text-muted">We update dependencies to keep things fresh.</p>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-6 text-center">
-          <div class="service-box">
-            <i class="fa fa-4x fa-heart wow bounceIn text-primary" data-wow-delay=".3s"></i>
-            <h3>Made with Love</h3>
-            <p class="text-muted">You have to make your websites with love these days!</p>
+            <p class="example-heading">Basic</p>
+            <div class="select-container">
+              <select id="example1" multiple>
+                <option value="labrador">Labrador</option>
+                <option value="german-shepard">German Shepard</option>
+                <option value="bulldog">Bulldog</option>
+                <option value="poodle">Poodle</option>
+                <option value="siberian-husky">Siberian Husky</option>
+              </select>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="no-padding" id="docs">
-    <div class="container-fluid">
+  <section id="docs" class="bg-primary">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 text-center">
+          <h2 class="section-heading">Options</h2>
+          <hr class="primary">
+        </div>
+      </div>
       <div class="row no-gutter">
-        <div class="col-lg-4 col-sm-6">
-          <a href="#" class="portfolio-box">
-            <!--<img src="img/portfolio/1.jpg" class="img-responsive" alt="">-->
-            <div class="portfolio-box-caption">
-              <div class="portfolio-box-caption-content">
-                <div class="project-category text-faded">
-                  Category
-                </div>
-                <div class="project-name">
-                  Project Name
-                </div>
-              </div>
-            </div>
-          </a>
-        </div>
-        <div class="col-lg-4 col-sm-6">
-          <a href="#" class="portfolio-box">
-            <!--<img src="img/portfolio/2.jpg" class="img-responsive" alt="">-->
-            <div class="portfolio-box-caption">
-              <div class="portfolio-box-caption-content">
-                <div class="project-category text-faded">
-                  Category
-                </div>
-                <div class="project-name">
-                  Project Name
-                </div>
-              </div>
-            </div>
-          </a>
-        </div>
-        <div class="col-lg-4 col-sm-6">
-          <a href="#" class="portfolio-box">
-            <!--<img src="img/portfolio/3.jpg" class="img-responsive" alt="">-->
-            <div class="portfolio-box-caption">
-              <div class="portfolio-box-caption-content">
-                <div class="project-category text-faded">
-                  Category
-                </div>
-                <div class="project-name">
-                  Project Name
-                </div>
-              </div>
-            </div>
-          </a>
-        </div>
-        <div class="col-lg-4 col-sm-6">
-          <a href="#" class="portfolio-box">
-            <!--<img src="img/portfolio/4.jpg" class="img-responsive" alt="">-->
-            <div class="portfolio-box-caption">
-              <div class="portfolio-box-caption-content">
-                <div class="project-category text-faded">
-                  Category
-                </div>
-                <div class="project-name">
-                  Project Name
-                </div>
-              </div>
-            </div>
-          </a>
-        </div>
-        <div class="col-lg-4 col-sm-6">
-          <a href="#" class="portfolio-box">
-            <!--<img src="img/portfolio/5.jpg" class="img-responsive" alt="">-->
-            <div class="portfolio-box-caption">
-              <div class="portfolio-box-caption-content">
-                <div class="project-category text-faded">
-                  Category
-                </div>
-                <div class="project-name">
-                  Project Name
-                </div>
-              </div>
-            </div>
-          </a>
-        </div>
-        <div class="col-lg-4 col-sm-6">
-          <a href="#" class="portfolio-box">
-            <!--<img src="img/portfolio/6.jpg" class="img-responsive" alt="">-->
-            <div class="portfolio-box-caption">
-              <div class="portfolio-box-caption-content">
-                <div class="project-category text-faded">
-                  Category
-                </div>
-                <div class="project-name">
-                  Project Name
-                </div>
-              </div>
-            </div>
-          </a>
-        </div>
+        <table class="table table-responsive table-bordered">
+          <thead>
+            <th>Parameter</th>
+            <th>Type</th>
+            <th>Default Value</th>
+            <th>Description</th>
+          </thead>
+          <tbody>
+            <tr>
+              <td>width</td>
+              <td>number</td>
+              <td>reads from elem</td>
+              <td>The Width of the new textarea that is generated. It reads the default from the select but can be overwritten by passing in width param</td>
+            </tr>
+            <tr>
+              <td>position</td>
+              <td>string</td>
+              <td>'top'</td>
+              <td>Currently Supports top and bottom positions</td>
+            </tr>
+            <tr>
+              <td>autoIncrease</td>
+              <td>boolean</td>
+              <td>true</td>
+              <td>Automatically increases and decreases the height of the textarea placeholder</td>
+            </tr>
+            <tr>
+              <td>showTitle</td>
+              <td>boolean</td>
+              <td>false</td>
+              <td>Whether to show a Title in the popover box</td>
+            </tr>
+            <tr>
+              <td>title</td>
+              <td>string</td>
+              <td>'Select multiple Options'</td>
+              <td>If showTitle is true, then which message to show inside the popover</td>
+            </tr>
+            <tr>
+              <td>debug</td>
+              <td>boolean</td>
+              <td>false</td>
+              <td>If true, then it shows debug message in the console. Should only be used in developer console.</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </section>
@@ -278,7 +239,7 @@
     </div>
   </section>
 
-  <aside id="links">
+  <aside id="links" class="bg-dark">
     <div class="container">
       <div class="row">
         <div class="col-lg-8 col-lg-offset-2 text-center">
@@ -329,11 +290,19 @@
   <!-- Initilization Scripts -->
   <script>
     $(document).ready(function() {
+
+      // The Main Example on the Top
       $('#main-example').popSelect({
-        debug: true,
+        //debug: true,
         showTitle: false,
         position: 'bottom'
       });
+
+      // Example 1: Basic Example
+      $('#example1').popSelect({
+        width: 400
+      });
+
     });
   </script>
 </body>
