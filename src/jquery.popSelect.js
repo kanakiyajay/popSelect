@@ -16,7 +16,8 @@
     autoIncrease: true,
     title: 'Select Multiple Options',
     debug: false,
-    maxAllowed: 0
+    maxAllowed: 0,
+    placeholderText: ' Click to Add Values'
   };
 
   var classNames = {
@@ -33,6 +34,7 @@
     popoverDisabled: 'disabled',
     placeholder: 'placeholder',
     placeholderInput: 'placeholder input',
+    placeholderText: 'placeholder-text',
     selectTitle: 'popover-select-title',
     top: 'top'
   };
@@ -106,7 +108,7 @@
      this.$popover.css({top: 0, left: 0});
 
      // Append Tagging System to it
-     this.$elem.after(createTaggingStr());
+     this.$elem.after(createTaggingStr(this.settings.placeholderText));
 
      // Get the Tag Wrapper for later use
      this.$tagWrapper = this.$elem.next(addDot(classNames.tagWrapper));
@@ -125,6 +127,14 @@
 
      // Show Popover on click of tags
      this.$tags.on(constants.click, function() {
+       $this.popoverShow();
+       $this.changePosition();
+       $this.setPlaceholder();
+       $this.focus();
+     });
+
+     // Also Attach to placeHolder Text
+     this.$tags.next(addDot(classNames.placeholderText)).on(constants.click, function() {
        $this.popoverShow();
        $this.changePosition();
        $this.setPlaceholder();
@@ -163,8 +173,8 @@
       // Whether to increase/decrease width
       this.changeSize();
 
-      // Whether to enable / disable popover
-      this.checkMaximumSelected();
+      // Whether to enable / disable popover and Placeholder Text
+      this.checkNumberOfTags();
     },
     enablePopover: function() {
       this.$popover.find(addDot(classNames.selectList) + ' li').removeClass(classNames.popoverDisabled);
@@ -172,9 +182,16 @@
     disablePopover: function() {
       this.$popover.find(addDot(classNames.selectList) + ' li').addClass(classNames.popoverDisabled);
     },
-    checkMaximumSelected: function() {
+    checkNumberOfTags: function() {
       if (this.settings.maxAllowed !== 0) {
         var currentNo = this.$tags.find(addDot(classNames.tag)).length;
+
+        if (currentNo === 0) {
+          this.enablePlaceHolderText();
+        } else {
+          this.disablePlaceHolderText();
+        }
+
         if (this.settings.maxAllowed > currentNo) {
           this.enablePopover();
         } else {
@@ -201,7 +218,7 @@
       this.changeSize();
 
       // Enable / Disable Popover
-      this.checkMaximumSelected();
+      this.checkNumberOfTags();
     },
     popoverShow: function() {
       // Change Position as well show popover
@@ -210,6 +227,12 @@
       } else {
         this.$popover.hide();
       }
+    },
+    enablePlaceHolderText: function() {
+      this.$tags.next(addDot(classNames.placeholderText)).show();
+    },
+    disablePlaceHolderText: function() {
+      this.$tags.next(addDot(classNames.placeholderText)).hide();
     },
     focus: function() {
       var $this = this;
@@ -269,7 +292,7 @@
         this.changeSize();
 
         // Enable / Disable Popover
-        this.checkMaximumSelected();
+        this.checkNumberOfTags();
       } else {
         this.log(logs.noElem);
       }
@@ -305,7 +328,7 @@
       for (var i = 0; i < options.length; i++) {
         list += createLiTag(options[i].val, options[i].text);
       }
-      var popoverStr = createPopoverStr(this.settings.title, list, this.settings.showTitle, this.settings.position);
+      var popoverStr = createPopoverStr(list, this.settings);
       return popoverStr;
     },
     changePosition: function() {
@@ -362,16 +385,21 @@
     }
   }
 
-  function createTaggingStr() {
+  function createTaggingStr(text) {
     return template('<div class="{tagWrapper}">' +
                 '<textarea class="{selectTextarea}"></textarea>' +
                 '<ul class="{selectTags}">' +
                 '</ul>' +
-             '</div>', {
-               tagWrapper: classNames.tagWrapper,
-               selectTextarea: classNames.selectTextarea,
-               selectTags: classNames.selectTags
-             });
+                  '<div class="{placeholderText}">' +
+                    '{text}' +
+                    '</div>' +
+                  '</div>', {
+                     text: text,
+                     placeholderText: classNames.placeholderText,
+                     tagWrapper: classNames.tagWrapper,
+                     selectTextarea: classNames.selectTextarea,
+                     selectTags: classNames.selectTags
+                   });
   }
 
   function createTagStr(val, text) {
@@ -402,9 +430,9 @@
               });
   }
 
-  function createPopoverStr(title, list, bool, position) {
+  function createPopoverStr(list, settings) {
     return template('<div class="{popoverSelect} {top}">' +
-             (bool ? '<h3 class="{selectTitle}">{title}</h3>' : '') +
+             (settings.showTitle ? '<h3 class="{selectTitle}">{title}</h3>' : '') +
              '<div class="{popoverBody}">' +
               '<ul class="{selectList}">' +
                '{list}' +
@@ -412,13 +440,13 @@
              '</div>' +
              '<div class="{arrow}"></div>' +
            '</div>', {
-             title: title,
+             title: settings.title,
              list: list,
              arrow: classNames.arrow,
              popoverSelect: classNames.popoverSelect,
              popoverBody: classNames.popoverBody,
              selectList: classNames.selectList,
-             top: position,
+             top: settings.position,
              selectTitle: classNames.selectTitle
            });
   }

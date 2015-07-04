@@ -282,3 +282,12 @@ textarea.popover-select-textarea {
   pointer-events: none;
   opacity: 0.5;
 }
+
+/* Placeholder Text */
+
+.placeholder-text {
+  position: absolute;
+  top: 9px;
+  left: 15px;
+  color: lightgray;
+}
