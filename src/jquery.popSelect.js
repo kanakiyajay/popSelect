@@ -17,7 +17,7 @@
     title: 'Select Multiple Options',
     debug: false,
     maxAllowed: 0,
-    placeholderText: ' Click to Add Values'
+    placeholderText: 'Click to Add Values'
   };
 
   var classNames = {
@@ -177,21 +177,22 @@
       this.checkNumberOfTags();
     },
     enablePopover: function() {
-      this.$popover.find(addDot(classNames.selectList) + ' li').removeClass(classNames.popoverDisabled);
+      this.$popover.find(addDot(classNames.selectList) + ' li')
+        .removeClass(classNames.popoverDisabled);
     },
     disablePopover: function() {
-      this.$popover.find(addDot(classNames.selectList) + ' li').addClass(classNames.popoverDisabled);
+      this.$popover.find(addDot(classNames.selectList) + ' li')
+        .addClass(classNames.popoverDisabled);
     },
     checkNumberOfTags: function() {
+      var currentNo = this.$tags.find(addDot(classNames.tag)).length;
+      if (currentNo === 0) {
+        this.enablePlaceHolderText();
+      } else {
+        this.disablePlaceHolderText();
+      }
+
       if (this.settings.maxAllowed !== 0) {
-        var currentNo = this.$tags.find(addDot(classNames.tag)).length;
-
-        if (currentNo === 0) {
-          this.enablePlaceHolderText();
-        } else {
-          this.disablePlaceHolderText();
-        }
-
         if (this.settings.maxAllowed > currentNo) {
           this.enablePopover();
         } else {
@@ -229,9 +230,11 @@
       }
     },
     enablePlaceHolderText: function() {
+      console.log('enablePlaceHolderText');
       this.$tags.next(addDot(classNames.placeholderText)).show();
     },
     disablePlaceHolderText: function() {
+      console.log('enablePlaceHolderText');
       this.$tags.next(addDot(classNames.placeholderText)).hide();
     },
     focus: function() {
