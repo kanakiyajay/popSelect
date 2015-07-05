@@ -200,6 +200,8 @@
           this.disablePopover();
         }
       }
+
+      this.syncWithSelect();
     },
     popoverToInput: function($elem) {
       var val = $elem.attr(constants.attrVal);
@@ -326,6 +328,18 @@
       var outerDims = isBody ? {width: $(window).width(), height: $(window).height()} : null;
 
       return $.extend({}, elRect, scroll, outerDims, elOffset);
+    },
+    syncWithSelect: function() {
+      var arrValues = this.$tags.find(addDot(classNames.tag)).map(function(i, elem) {
+        return $(elem).attr('data-value');
+      }).toArray();
+      this.$elem.children(constants.option).each(function(i, option) {
+        if (arrValues.indexOf($(option).val()) < 0) {
+          $(option).removeAttr('selected');
+        } else {
+          $(option).attr('selected', 'selected');
+        }
+      });
     },
     appendToPopup: function(val, text) {
       var li = createLiTag(val, text);
