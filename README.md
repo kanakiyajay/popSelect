@@ -1,5 +1,7 @@
 # PopSelect jQuery  plugin
 
+![select popovers](img/popSelect.jpg)
+
 ### A simple to use jQuery plugin to create popover boxes over select input tags. A radically new way to select multiselect.
 
 ## Basic Usage
