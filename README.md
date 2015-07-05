@@ -74,7 +74,10 @@ The basic structure of the project is given in the following way:
 
 ## TODO
 
-- [ ] Add option for general placeholder.
+- [ ] Add support for setting selected='selected' inside multiple select
+- [ ] Add support for populating the values from a different source
+- [x] Add support for initial selected values
+- [x] Add option for general placeholder.
 - [ ] Add support for easy theming.
 - [x] Add support for getting value from select.
 - [x] Add support for backspace delete

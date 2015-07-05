@@ -20,9 +20,9 @@
   <link rel="stylesheet" href="css/popSelect.css">
 
   <!-- Custom Fonts
-        <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
-        <link href='http://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
-        -->
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+  -->
 </head>
 
 <body id="page-top">
@@ -77,7 +77,7 @@
                   <option value="US">U.S.</option>
                   <option value="Germany">Germany</option>
                   <option value="UK">UK</option>
-                  <option value="Austrailia">Austrailia</option>
+                  <option value="Austrailia" selected="selected">Austrailia</option>
                 </select>
               </div>
             </div>
@@ -167,6 +167,47 @@ $('#example2').popSelect({
                 <option value="lost">Lost</option>
                 <option value="sherlock-holmes">Sherlock Holmes</option>
                 <option value="true-detectives">True Detectives</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-md-6 text-center">
+          <div class="service-box">
+          <p class="example-heading">With pre-populated values</p>
+            <div class="code">
+              <pre>
+<code class="language-javascript">
+$('#example3').popSelect({
+  showTitle: false
+});
+</code>
+              </pre>
+              <pre>
+<code class="language-markup">
+&lt;select id=&quot;example3&quot; multiple&gt;
+  &lt;option value=&quot;game-of-thrones&quot;&gt;Game Of Thrones&lt;/option&gt;
+  &lt;option value=&quot;prison-break&quot;&gt;Prison Break&lt;/option&gt;
+  &lt;option value=&quot;lost&quot;&gt;Lost&lt;/option&gt;
+  &lt;option value=&quot;sherlock-holmes&quot; selected=&quot;selected&quot;&gt;Sherlock Holmes&lt;/option&gt;
+  &lt;option value=&quot;true-detectives&quot; selected=&quot;selected&quot;&gt;True Detectives&lt;/option&gt;
+&lt;/select&gt;
+</code>
+              </pre>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 text-center">
+          <div class="service-box">
+            <div class="select-container">
+              <select id="example3" multiple>
+                <option value="game-of-thrones">Game Of Thrones</option>
+                <option value="prison-break">Prison Break</option>
+                <option value="lost">Lost</option>
+                <option value="sherlock-holmes" selected="selected">Sherlock Holmes</option>
+                <option value="true-detectives" selected="selected">True Detectives</option>
               </select>
             </div>
           </div>
@@ -340,6 +381,7 @@ $('#example2').popSelect({
 
       // The Main Example on the Top
       $('#main-example').popSelect({
+        placeholderText: 'Which countries have you travelled to ?',
         showTitle: false
       });
 
@@ -354,6 +396,11 @@ $('#example2').popSelect({
         showTitle: false,
         placeholderText: 'Click to Add More',
         position: 'bottom'
+      });
+
+      // With Pre Selected Values
+      $('#example3').popSelect({
+        showTitle: false
       });
 
     });

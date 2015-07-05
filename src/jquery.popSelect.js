@@ -81,7 +81,8 @@
      this.$options = this.$elem.children(constants.option).map(function(i, option) {
        return {
          val: $(option).val(),
-         text: $(option).text()
+         text: $(option).text(),
+         selected: $(option).attr('selected')
        };
      });
 
@@ -108,7 +109,7 @@
      this.$popover.css({top: 0, left: 0});
 
      // Append Tagging System to it
-     this.$elem.after(createTaggingStr(this.settings.placeholderText));
+     this.$elem.after(createTaggingStr(this.settings.placeholderText, this.$options));
 
      // Get the Tag Wrapper for later use
      this.$tagWrapper = this.$elem.next(addDot(classNames.tagWrapper));
@@ -155,6 +156,7 @@
 
      // Finally Hide the Element
      this.$elem.hide();
+     this.checkNumberOfTags();
    },
     inputToPopover: function($elem) {
       var $li = $elem.parent();
@@ -230,11 +232,9 @@
       }
     },
     enablePlaceHolderText: function() {
-      console.log('enablePlaceHolderText');
       this.$tags.next(addDot(classNames.placeholderText)).show();
     },
     disablePlaceHolderText: function() {
-      console.log('enablePlaceHolderText');
       this.$tags.next(addDot(classNames.placeholderText)).hide();
     },
     focus: function() {
@@ -329,7 +329,9 @@
     generatePopover: function(options) {
       var list = '';
       for (var i = 0; i < options.length; i++) {
-        list += createLiTag(options[i].val, options[i].text);
+        if (!options[i].selected) {
+          list += createLiTag(options[i].val, options[i].text);
+        }
       }
       var popoverStr = createPopoverStr(list, this.settings);
       return popoverStr;
@@ -388,15 +390,27 @@
     }
   }
 
-  function createTaggingStr(text) {
+  function createTagsLi(options) {
+    var str = '';
+    for (var i = 0; i < options.length; i++) {
+      if (options[i].selected) {
+        str += createTagStr(options[i].val, options[i].text);
+      }
+    }
+    return str;
+  }
+
+  function createTaggingStr(text, options) {
     return template('<div class="{tagWrapper}">' +
                 '<textarea class="{selectTextarea}"></textarea>' +
                 '<ul class="{selectTags}">' +
+                  '{tags}' +
                 '</ul>' +
                   '<div class="{placeholderText}">' +
                     '{text}' +
                     '</div>' +
                   '</div>', {
+                     tags: createTagsLi(options),
                      text: text,
                      placeholderText: classNames.placeholderText,
                      tagWrapper: classNames.tagWrapper,
