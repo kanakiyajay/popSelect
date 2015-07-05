@@ -17,7 +17,8 @@
     title: 'Select Multiple Options',
     debug: false,
     maxAllowed: 0,
-    placeholderText: 'Click to Add Values'
+    placeholderText: 'Click to Add Values',
+    autofocus: false
   };
 
   var classNames = {
@@ -74,90 +75,92 @@
   // Avoid Plugin.prototype conflicts
   $.extend(Plugin.prototype, {
     init: function() {
-     var $this = this;
-     this.$elem = $(this.element);
+      var $this = this;
+      this.$elem = $(this.element);
 
-     // Get all the options in an array
-     this.$options = this.$elem.children(constants.option).map(function(i, option) {
+      // Get all the options in an array
+      this.$options = this.$elem.children(constants.option).map(function(i, option) {
        return {
          val: $(option).val(),
          text: $(option).text(),
          selected: $(option).attr('selected')
        };
-     });
+      });
 
-     // Wrap the whole input box in your own popover
-     this.$elem.wrap(template(createEmptyDiv(), {
-       wrapper: classNames.selectWrapper
-     }));
+      // Wrap the whole input box in your own popover
+      this.$elem.wrap(template(createEmptyDiv(), {
+        wrapper: classNames.selectWrapper
+      }));
 
-     var elemPos = this.getPosition(this.$elem);
-     this.elemPos = elemPos;
+      var elemPos = this.getPosition(this.$elem);
+      this.elemPos = elemPos;
 
-     // Also Add the required css Properties
-     this.$elem
+      // Also Add the required css Properties
+      this.$elem
       .parent(addDot(classNames.selectWrapper))
       .css({width: this.settings.width || elemPos.width, height: elemPos.height});
 
-     // Append the popover to $elem
-     var popUpCode = this.generatePopover(this.$options);
-     $this.log(logs.popoverGenerated, popUpCode);
-     this.$elem.after(popUpCode);
+      // Append the popover to $elem
+      var popUpCode = this.generatePopover(this.$options);
+      $this.log(logs.popoverGenerated, popUpCode);
+      this.$elem.after(popUpCode);
 
-     // Assign the $popover to the new $elem
-     this.$popover = this.$elem.next(addDot(classNames.popoverSelect));
-     this.$popover.css({top: 0, left: 0});
+      // Assign the $popover to the new $elem
+      this.$popover = this.$elem.next(addDot(classNames.popoverSelect));
+      this.$popover.css({top: 0, left: 0});
 
-     // Append Tagging System to it
-     this.$elem.after(createTaggingStr(this.settings.placeholderText, this.$options));
+      // Append Tagging System to it
+      this.$elem.after(createTaggingStr(this.settings.placeholderText, this.$options));
 
-     // Get the Tag Wrapper for later use
-     this.$tagWrapper = this.$elem.next(addDot(classNames.tagWrapper));
-     this.baseHeight = this.$tagWrapper.height();
+      // Get the Tag Wrapper for later use
+      this.$tagWrapper = this.$elem.next(addDot(classNames.tagWrapper));
+      this.baseHeight = this.$tagWrapper.height();
 
-     // Get the input
-     this.$inputTagField = this.$tagWrapper.find(addDot(classNames.selectTextarea));
+      // Get the input
+      this.$inputTagField = this.$tagWrapper.find(addDot(classNames.selectTextarea));
 
-     // Hide the poover when blurring the inputTagField
-     this.$inputTagField.on(constants.blur, function() {
-       $this.$popover.hide();
-     });
+      // Hide the poover when blurring the inputTagField
+      this.$inputTagField.on(constants.blur, function() {
+        $this.$popover.hide();
+      });
 
-     // Get the tags in the wrapper
-     this.$tags = this.$tagWrapper.find(addDot(classNames.selectTags));
+      // Get the tags in the wrapper
+      this.$tags = this.$tagWrapper.find(addDot(classNames.selectTags));
 
-     // Show Popover on click of tags
-     this.$tags.on(constants.click, function() {
-       $this.popoverShow();
-       $this.changePosition();
-       $this.setPlaceholder();
-       $this.focus();
-     });
+      // Show Popover on click of tags
+      this.$tags.on(constants.click, this.initializePopover);
 
-     // Also Attach to placeHolder Text
-     this.$tags.next(addDot(classNames.placeholderText)).on(constants.click, function() {
-       $this.popoverShow();
-       $this.changePosition();
-       $this.setPlaceholder();
-       $this.focus();
-     });
+      // Also Attach to placeHolder Text
+      this.$tags.next(addDot(classNames.placeholderText)).on(constants.click, this.initializePopover);
 
-     // Attach Event Listener to ul list
-     this.$tags.on(constants.click, addDot(classNames.popoverClose), function() {
-       $this.inputToPopover($(this));
-     });
+      // Attach Event Listener to ul list
+      this.$tags.on(constants.click, addDot(classNames.popoverClose), function() {
+        $this.inputToPopover($(this));
+      });
 
-     // Attach List Event Handlers to Li
-     this.$popover.find(addDot(classNames.selectList)).on(constants.mousedown, function(e) {
-       e.preventDefault();
-     }).on(constants.click, constants.li, function() {
-       $this.popoverToInput($(this));
-     });
+      // Attach List Event Handlers to Li
+      this.$popover.find(addDot(classNames.selectList)).on(constants.mousedown, function(e) {
+        e.preventDefault();
+      }).on(constants.click, constants.li, function() {
+        $this.popoverToInput($(this));
+      });
 
-     // Finally Hide the Element
-     this.$elem.hide();
-     this.checkNumberOfTags();
-   },
+      // Finally Hide the Element
+      this.$elem.hide();
+
+      // Required for placeholdertext and pre-selected values
+      this.checkNumberOfTags();
+
+      if (this.settings.autofocus) {
+        this.initializePopover();
+      }
+    },
+    initializePopover: function() {
+      this.popoverShow();
+      this.changePosition();
+      this.setPlaceholder();
+      this.focus();
+    },
     inputToPopover: function($elem) {
       var $li = $elem.parent();
       this.log(logs.closeClicked, $li);
