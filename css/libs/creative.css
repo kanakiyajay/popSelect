@@ -483,6 +483,12 @@ body {
     padding: 35px 0;
 }
 
-#example1, #example2 {
+#example1, #example2, #example3 {
     width: 400px;
+}
+
+.example-heading {
+    text-align: center;
+    font-size: 20px;
+    color: rgb(95, 95, 95);
 }

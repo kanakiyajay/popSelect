@@ -75,6 +75,7 @@ The basic structure of the project is given in the following way:
 ## TODO
 
 - [ ] Add support for setting selected='selected' inside multiple select
+- [ ] Add support for autofocus option for the select.
 - [ ] Add support for populating the values from a different source
 - [x] Add support for initial selected values
 - [x] Add option for general placeholder.

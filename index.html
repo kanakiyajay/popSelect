@@ -110,10 +110,10 @@
       </div>
     </div>
     <div class="container">
+      <p class="example-heading">#1: Max Allowed upto 2</p>
       <div class="row">
         <div class="col-md-6 text-center">
           <div class="service-box">
-            <p class="example-heading">With Max Allowed upto 2</p>
             <div class="code">
               <pre>
 <code class="language-javascript">
@@ -142,9 +142,9 @@ $('#example1').popSelect({
       </div>
       <hr>
       <div class="row">
+        <p class="example-heading">#2: Popover placed at the bottom</p>
         <div class="col-md-6 text-center">
           <div class="service-box">
-          <p class="example-heading">With Popover placed at the bottom</p>
             <div class="code">
               <pre>
 <code class="language-javascript">
@@ -174,9 +174,9 @@ $('#example2').popSelect({
       </div>
       <hr>
       <div class="row">
+        <p class="example-heading">#3: Pre-Populated values</p>
         <div class="col-md-6 text-center">
-          <div class="service-box">
-          <p class="example-heading">With pre-populated values</p>
+          <div class="code-box">
             <div class="code">
               <pre>
 <code class="language-javascript">
@@ -250,6 +250,12 @@ $('#example3').popSelect({
               <td>number</td>
               <td>0</td>
               <td>The maximum number of tags that are allowed inside the textarea. After which the tags inside the popover are disabled. Keep 0 removing any limit</td>
+            </tr>
+            <tr>
+              <td>autofocus</td>
+              <td>boolean</td>
+              <td>false</td>
+              <td>When the document is initilized it will autotomaticallu open up the popover and focus the textarea</td>
             </tr>
             <tr>
               <td>autoIncrease</td>
@@ -382,7 +388,8 @@ $('#example3').popSelect({
       // The Main Example on the Top
       $('#main-example').popSelect({
         placeholderText: 'Which countries have you travelled to ?',
-        showTitle: false
+        showTitle: false,
+        autofocus: true
       });
 
       // Example 1: With Max Allowed
