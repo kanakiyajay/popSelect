@@ -128,10 +128,12 @@
       this.$tags = this.$tagWrapper.find(addDot(classNames.selectTags));
 
       // Show Popover on click of tags
-      this.$tags.on(constants.click, this.initializePopover);
+      this.$tags
+        .on(constants.click, this.initializePopover.bind(this));
 
       // Also Attach to placeHolder Text
-      this.$tags.next(addDot(classNames.placeholderText)).on(constants.click, this.initializePopover);
+      this.$tags.next(addDot(classNames.placeholderText))
+        .on(constants.click, this.initializePopover.bind(this));
 
       // Attach Event Listener to ul list
       this.$tags.on(constants.click, addDot(classNames.popoverClose), function() {
@@ -154,12 +156,6 @@
       if (this.settings.autofocus) {
         this.initializePopover();
       }
-    },
-    initializePopover: function() {
-      this.popoverShow();
-      this.changePosition();
-      this.setPlaceholder();
-      this.focus();
     },
     inputToPopover: function($elem) {
       var $li = $elem.parent();
@@ -233,6 +229,12 @@
       } else {
         this.$popover.hide();
       }
+    },
+    initializePopover: function() {
+      this.popoverShow();
+      this.changePosition();
+      this.setPlaceholder();
+      this.focus();
     },
     enablePlaceHolderText: function() {
       this.$tags.next(addDot(classNames.placeholderText)).show();
