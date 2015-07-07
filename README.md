@@ -1,4 +1,4 @@
-# PopSelect jQuery  plugin
+# [PopSelect jQuery  plugin](http://jquer.in/popSelect/)
 
 ![select popovers](img/popSelect.jpg)
 

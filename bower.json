@@ -6,7 +6,10 @@
 		"Jay Kanakiya <kanakiyajay@gmail.com>"
 	],
 	"description": "Replaces traditional <select> with a better looking alternative",
-	"main": "src/jquery.popSelect.js",
+	"main": ["dist/jquery.popSelect.min.js", "dist/jquery.popSelect.min.css"],
+	"dependencies": {
+		"jquery": "latest"
+	},
 	"keywords": [
 		"jquery",
 		"plugin",
