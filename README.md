@@ -16,6 +16,14 @@
 
 	`bower install popSelect`
 
+	or
+
+	`npm install popselect`
+
+	or
+
+	[download](https://github.com/kanakiyajay/popSelect/archive/master.zip)
+
 3. Include plugin's js code:
 
 	```html
