@@ -1,9 +1,3 @@
-/*
-  jQuery popSelect v0.0.2
-  Copyright (c) 2015 Jay Kanakiya
-  GitHub: https://github.com/kanakiyajay/popSelect
-  License: http://www.opensource.org/licenses/mit-license.php
-*/
 ;(function($, window, document, undefined) {
 
   'use strict';
@@ -324,7 +318,9 @@
         elRect = $.extend({}, elRect, {width: w, height: h});
       }
       var elOffset = isBody ? {top: 0, left: 0} : $element.offset();
-      var scroll = {scroll: isBody ? document.documentElement.scrollTop || document.body.scrollTop : $element.scrollTop()}
+      /* jshint ignore:start */
+      var scroll = {scroll: isBody ? document.documentElement.scrollTop || document.body.scrollTop : $element.scrollTop() }
+      /* jshint ignore:end */
       var outerDims = isBody ? {width: $(window).width(), height: $(window).height()} : null;
 
       return $.extend({}, elRect, scroll, outerDims, elOffset);
