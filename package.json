@@ -1,6 +1,6 @@
 {
   "name": "jquey-popselect",
-  "version": "0.1.12",
+  "version": "0.1.13",
   "description": "Replaces traditional <select> with a options from popover",
   "keywords": [
     "jquery-plugin",
