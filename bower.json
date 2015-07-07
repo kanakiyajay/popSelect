@@ -10,6 +10,9 @@
 	"dependencies": {
 		"jquery": "latest"
 	},
+	"ignore": [
+
+	],
 	"keywords": [
 		"jquery",
 		"plugin",

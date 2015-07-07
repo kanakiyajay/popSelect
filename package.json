@@ -4,6 +4,7 @@
   "description": "Replaces traditional <select> with a options from popover",
   "keywords": [
     "jquery-plugin",
+    "ecosystem:jquery",
     "jquery",
     "select",
     "selectbox"
