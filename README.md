@@ -12,14 +12,18 @@
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 	```
 
-2. Include plugin's js code:
+2. Install popSelect using bower or directly from git.
+
+	`bower install popSelect`
+
+3. Include plugin's js code:
 
 	```html
 	<link rel="stylesheet" href="css/popSelect.css">
 	<script src="js/jquery.popSelect.min.js"></script>
 	```
 
-3. Call the plugin:
+4. Call the plugin:
 
 	Conside the following select tag.
 
