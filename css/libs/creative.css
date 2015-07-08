@@ -504,3 +504,8 @@ body {
 .text-white {
     color: white;
 }
+
+.twitter-share-button {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}

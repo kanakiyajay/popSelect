@@ -10,6 +10,21 @@
   <meta name="keywords" content="jQuery, jQuery plugin, javascript library">
   <meta name="author" content="Jay Kanakiya">
 
+  <!-- Open Graph Tags -->
+  <meta property="og:title" content="A jQuery plugin for sleek looking popover tagging system to replace select">
+  <meta property="og:site_name" content="popSelect">
+  <meta property="og:url" content="http://jquer.in/popSelect/">
+  <meta property="og:description" content="popSelect is a jQuery plugin to replace the traditional select box with a sleek Popover with options pre-populated for a better User interface.">
+  <meta property="fb:app_id" content="390381041110554">
+  <meta property="og:type" content="article">
+
+  <!-- Twitter Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@techiejayk">
+  <meta name="twitter:title" content="A jQuery plugin for popover tagging system to replace select">
+  <meta name="twitter:description" content="popSelect is a jQuery plugin to replace the traditional select box with a sleek Popover with options pre-populated for a better User interface.">
+  <meta name="twitter:image:src" content="http://jquer.in/wp-content/uploads/2015/07/popSelect.jpg">
+
   <link rel="stylesheet" href="css/libs/bootstrap.css">
   <link rel="stylesheet" href="css/libs/prism.css">
   <link rel="stylesheet" href="css/libs/font-awesome.min.css">
@@ -43,6 +58,9 @@
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="toggle-navbar">
         <ul class="nav navbar-nav navbar-right">
+          <li>
+            <a id="tweet" href="https://twitter.com/intent/tweet?url=http://jquer.in/popSelect&text=A%20jQuery%20plugin%20to%20replace%20select%20to%20a%20sleek%20looking%20popover" class="twitter-share-button" data-via="techiejayk" data-hashtags="jquery" data-dnt="true">tweet</a>
+          </li>
           <li>
             <iframe src="https://ghbtns.com/github-btn.html?user=kanakiyajay&repo=popSelect&type=star&count=true" frameborder="0" style="margin-top: 15px;" scrolling="0" width="100px" height="20px"></iframe>
           </li>
@@ -389,7 +407,7 @@ $('#example3').popSelect({
           </div>
           <div class="col-lg-4 div col-xs-12">
             <pre><code>bower install popSelect</code></pre>
-            <pre><code>npm install popSelect</code></pre>
+            <pre><code>npm install popselect</code></pre>
           </div>
         </div>
       </div>
@@ -427,13 +445,16 @@ $('#example3').popSelect({
           </div>
         </div>
 
-        <div class="col-lg-4 text-center">
+        <div class="col-lg-4 text-center" itemscope itemtype="http://schema.org/Person">
           <div class="row">
             <div class="col-xs-12">
               <img width="221" height="221" class="img-circle" src="img/jay-kanakiya.jpg" alt="Jay Kanakiya">
             </div>
             <div class="col-xs-12 text-center m-t-xs">
-              <h4 class="text-uppercase text-muted">Jay Kanakiya</h4>
+              <h4 itemprop="name" class="text-uppercase text-muted">Jay Kanakiya</h4>
+              <div style="display:none">
+                <p itemprop="jobTitle">Front End Developer</p>
+              </div>
             </div>
           </div>
         </div>
@@ -508,6 +529,21 @@ $('#example3').popSelect({
     </div>
   </aside>
 
+  <!-- Microdata for Software Application -->
+  <div style="display:none" itemscope itemtype="http://schema.org/SoftwareApplication">
+    <span itemprop="name">popSelect</span><br>
+    <h1 itemprop="headline">A jQuery plugin to replace multiselect with sleek popovers</h1>
+    REQUIRES <span itemprop="operatingSystem">Windows</span><br>
+    <div itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
+    RATING <span itemprop="ratingValue">5</span>
+    (<span itemprop="ratingCount">23 ratings</span>)
+
+    <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+        Price: $<span itemprop="price">0</span>
+        <meta itemprop="priceCurrency" content="INR">
+    </div>
+</div>
+
   <!-- jQuery -->
   <script src="src/libs/jquery.js"></script>
 
@@ -556,6 +592,22 @@ $('#example3').popSelect({
       });
 
     });
+  </script>
+
+  <!-- Twitter Snippet -->
+  <script>
+    !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+  </script>
+
+  <!-- Google Analytics Snippet -->
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-33060097-1', 'auto');
+    ga('send', 'pageview');
   </script>
 </body>
 

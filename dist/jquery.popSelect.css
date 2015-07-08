@@ -1,5 +1,5 @@
 /*
- *  jquey-popselect - v0.1.12
+ *  popselect - v0.1.13
  *  Replaces traditional <select> with a options from popover
  *  http://jquer.in/popselect
  *
