@@ -455,7 +455,7 @@
   function createPlaceholderInput() {
     return template('<li class="{placeholder}">' +
              '<div>' +
-              '<input type="text">' +
+              '<input type="text" readonly="true">' +
              '</div>' +
               '</li>', {
                 placeholder: classNames.placeholder

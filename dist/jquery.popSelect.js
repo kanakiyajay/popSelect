@@ -1,5 +1,5 @@
 /*
- *  popselect - v0.1.13
+ *  popselect - v0.1.14
  *  Replaces traditional <select> with a options from popover
  *  http://jquer.in/popselect
  *
@@ -463,7 +463,7 @@
   function createPlaceholderInput() {
     return template('<li class="{placeholder}">' +
              '<div>' +
-              '<input type="text">' +
+              '<input type="text" readonly="true">' +
              '</div>' +
               '</li>', {
                 placeholder: classNames.placeholder
