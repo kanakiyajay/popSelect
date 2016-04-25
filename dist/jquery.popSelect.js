@@ -155,6 +155,9 @@
       // Required for placeholdertext and pre-selected values
       this.checkNumberOfTags();
 
+      // Trigger init event
+      this.$elem.trigger('popselect:init');
+
       if (this.settings.autofocus) {
         this.initializePopover();
       }
@@ -178,6 +181,9 @@
 
       // Whether to enable / disable popover and Placeholder Text
       this.checkNumberOfTags();
+
+      // Trigger remove event, passing value and text of removed tag
+      this.$elem.trigger('popselect:remove', [val, text]);
     },
     enablePopover: function() {
       this.$popover.find(addDot(classNames.selectList) + ' li')
@@ -225,6 +231,9 @@
 
       // Enable / Disable Popover
       this.checkNumberOfTags();
+
+      // Trigger add event, passing value and text of added tag
+      this.$elem.trigger('popselect:add', [val, text]);
     },
     popoverShow: function() {
       // Change Position as well show popover
