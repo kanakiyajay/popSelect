@@ -290,9 +290,9 @@ $('#example3').popSelect({
           <div class="service-box">
             <div class="select-container">
               <select id="example3" multiple>
-                <option value="game-of-thrones">Game Of Thrones</option>
-                <option value="prison-break">Prison Break</option>
-                <option value="lost">Lost</option>
+                <option value="game-of-thrones" selected="selected">Game Of Thrones</option>
+                <option value="prison-break" selected="selected">Prison Break</option>
+                <option value="lost" selected="selected">Lost</option>
                 <option value="sherlock-holmes" selected="selected">Sherlock Holmes</option>
                 <option value="true-detectives" selected="selected">True Detectives</option>
               </select>
@@ -595,7 +595,8 @@ $('#example3').popSelect({
 
       // With Pre Selected Values
       $('#example3').popSelect({
-        showTitle: false
+        showTitle: false,
+        autoIncrease: true
       });
 
     });

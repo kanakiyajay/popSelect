@@ -121,7 +121,7 @@
       // Get the input
       this.$inputTagField = this.$tagWrapper.find(addDot(classNames.selectTextarea));
 
-      // Hide the poover when blurring the inputTagField
+      // Hide the popover when blurring the inputTagField
       this.$inputTagField.on(constants.blur, function() {
         $this.$popover.hide();
       });
@@ -154,6 +154,9 @@
 
       // Required for placeholdertext and pre-selected values
       this.checkNumberOfTags();
+
+      // If pre-selected are higher than normal
+      this.changeSize();
 
       // Trigger init event
       this.$elem.trigger('popselect:init');
